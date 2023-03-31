@@ -1,1 +1,104 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~bootstrap-icons/font/bootstrap-icons.css';
+
+html {
+  height: 100%;
+  margin: 0;
+}
+
+.navbar {
+  background-color: #0f1922;
+  border-bottom: 1px solid #fffbf5;
+}
+
+.navbar-brand {
+  color: #fffbf5;
+}
+
+.navbar-nav .nav-link {
+  color: #fffbf5;
+}
+
+.navbar-nav {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #fd4556 !important;
+}
+
+.no-padding-container-fluid {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+}
+
+.btn-outline-light {
+  color: #fffbf5;
+  border-color: #fffbf5;
+}
+
+.offcanvas {
+  background-color: #0f1922;
+  color: #fffbf5;
+}
+
+.offcanvas .offcanvas-body a {
+  color: #fffbf5;
+}
+
+.offcanvas .offcanvas-body a:hover {
+  color: #fd4556;
+}
+
+/*------------------------------------BOTÓN PERFIL---------------------------------------*/
+.btn-icon {
+  
+  background-color: transparent;
+  border-color: transparent;
+  padding: 0;
+}
+
+.btn-icon i {
+  color: #fffbf5;
+  transition: color 0.3s ease-in-out;
+  font-size: 2rem;
+}
+
+.btn-icon:hover i {
+  color: #fd4556;
+  
+}
+
+
+/*-----------------------------------------------------------------------------------------*/
+
+footer {
+  /*position: fixed;*/
+  margin-top: 200px;
+  left: 0px;
+  bottom: 0px;
+  height: 80px;
+  width: 100%;
+  background-color: #0f1922;
+  border-top: 1px solid #fffbf5;
+}
+
+footer a:hover {
+  color: #fd4556 !important;
+}
+
+/* Oculta la barra de scroll */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  margin-right: calc(100vw - 100%);
+  background-color: #0f1922 !important;
+}
+

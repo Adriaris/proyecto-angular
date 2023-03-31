@@ -1,0 +1,166 @@
+<div class="col-md-6 offset-md-3">
+    <form #registerForm="ngForm" (ngSubmit)="onSubmit()" ngNativeValidate>
+        <!-- Sección 1: Datos personales -->
+        <div *ngIf="currentSection === 0">
+            <h1>Register</h1>
+            <!-- Campos de datos personales -->
+
+            <div class="form-group">
+                <label for="nickname">Nickname</label>
+                <input type="text" class="form-control" id="nickname" name="nickname" [(ngModel)]="user.nickname"
+                    #nickname="ngModel" required pattern="[a-zA-Z]+">
+                <small *ngIf="!nickname.valid && nickname.touched" class="invalid-feedback d-block">
+                    Nickname is not valid
+                </small>
+            </div>
+
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="date" class="form-control" id="age" name="age" [(ngModel)]="user.age" #age="ngModel" required>
+                <small *ngIf="!age.valid && age.touched" class="invalid-feedback d-block">Age is not valid</small>
+            </div>
+            
+
+            <div class="form-group">
+                <label for="nationality">Nationality</label>
+                <input type="text" class="form-control" id="nationality" name="nationality"
+                    [(ngModel)]="user.nationality" #nationality="ngModel" required>
+                <small *ngIf="!nationality.valid && nationality.touched" class="invalid-feedback d-block">
+                    Nationality is not valid
+                </small>
+            </div>
+
+            <div class="form-group">
+                <label for="short_description">Short description</label>
+                <textarea class="form-control" id="short_description" name="short_description"
+                    [(ngModel)]="user.short_description" #short_description="ngModel" required></textarea>
+                <small *ngIf="!short_description.valid && short_description.touched" class="invalid-feedback d-block">
+                    Short description is not valid
+                </small>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" [(ngModel)]="user.email"
+                    #email="ngModel" required>
+                <small *ngIf="!email.valid && email.touched" class="invalid-feedback d-block">
+                    Email is not valid
+                </small>
+            </div>
+
+            <div class="form-group">
+                <label for="passwd">Password</label>
+                <input type="password" class="form-control" id="passwd" name="passwd" [(ngModel)]="user.passwd"
+                    #passwd="ngModel" required>
+                <small *ngIf="!passwd.valid && passwd.touched" class="invalid-feedback d-block">
+                    Password is not valid
+                </small>
+            </div>
+
+
+            <!-- Campos de datos personales -->
+            <div class="form-group text-right mt-3 row">
+                <div class="col-12 d-flex justify-content-end">
+                    <button class="btn btn-primary" (click)="nextSection()">Next</button>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Sección 2: Datos de contacto -->
+        <div *ngIf="currentSection === 1">
+            <div class="form-group">
+                <label>Ambition</label>
+                <select required class="form-control" [(ngModel)]="user.id_ambition" name="selectedAmbition">
+                    <option *ngFor="let ambition of ambitions" [value]="ambition.id">{{ ambition.name }}</option>
+                </select>
+                <small *ngIf="!user.id_ambition" class="invalid-feedback d-block">
+                    Please select an ambition
+                </small>
+            </div>
+
+            <div class="form-group">
+                <label>Rank</label>
+                <select required class="form-control" [(ngModel)]="user.id_rank" name="selectedRank">
+                    <option *ngFor="let rank of ranks" [value]="rank.id">{{ rank.name }} {{ rank.level }}</option>
+                </select>
+                <small *ngIf="!user.id_rank" class="invalid-feedback d-block">
+                    Please select one rank
+                </small>
+            </div>
+
+            <div class="form-group">
+                <label>Team roles</label>
+                <div class="row radioBox">
+                    <div class="col-md-4" *ngFor="let role of teamRoles">
+                        <div class="form-check">
+                            <input required class="form-check-input" type="radio" id="{{ role.id_trole }}" name="teamRole"
+                                [(ngModel)]="user.id_trole" [value]="role.id_trole" style="margin-top: 1.5em;">
+                            <label class="form-check-label" for="{{ role }}">
+                                {{ role.trole }}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <small *ngIf="!user.id_trole" class="invalid-feedback d-block">
+                    Please select one team role
+                </small>
+            </div>
+
+            <div class="form-group">
+                <label>Individual roles</label>
+                <div class="row radioBox">
+                    <div class="col-md-4" *ngFor="let role of soloRoles">
+                        <div class="form-check">
+                            <input required class="form-check-input" type="radio" id="{{ role.id_srole }}" name="soloRole"
+                                [(ngModel)]="user.id_srole" [value]="role.id_srole" style="margin-top: 1.5em;">
+                            <label class="form-check-label" for="{{ role }}">
+                                {{ role.srole }}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <small *ngIf="!user.id_srole" class="invalid-feedback d-block">
+                    Please select an individual role
+                </small>
+            </div>
+
+            <div class="form-group text-right mt-3 row">
+                <div class="col-6 d-flex justify-content-start">
+                    <button class="btn btn-secondary" (click)="previousSection()">Back</button>
+                </div>
+                <div class="col-6 d-flex justify-content-end">
+                    <button class="btn btn-primary" (click)="nextSection()">Next</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección 3: Datos de contacto -->
+        <div *ngIf="currentSection === 2">
+
+            <div class="row">
+                <div class="col-3" *ngFor="let character of characters">
+                    <input required type="checkbox" name="characters" [value]="character.id_character"
+                        (click)="updateSelectedCharacters($event, character.id_character)"
+                        [disabled]="showError && !selectedCharacters.includes(character.id_character)"
+                        [checked]=" selectedCharacters.includes(character.id_character)">
+                    <label>
+                        {{ character.display_name }}
+                    </label>
+                </div>
+                <div *ngIf="showError" class="text-danger">¡You can only select 3 characters!</div>
+
+            </div>
+
+            <div class="form-group text-right mt-3 row">
+                <div class="col-6 d-flex justify-content-start">
+                    <button class="btn btn-secondary" (click)="previousSection()">Back</button>
+                </div>
+                <div class="col-6 d-flex justify-content-end">
+                    <input type="submit" name="submit" class="btn btn-success" [disabled]="registerForm.form.invalid"
+                        value="Register">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

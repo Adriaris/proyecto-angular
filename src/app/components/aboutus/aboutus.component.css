@@ -1,0 +1,27 @@
+/*.container {
+    background-color: #0f1922;
+    border-radius: 10px;
+    padding: 40px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+  }*/
+  
+  h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #fd4556 !important;
+  }
+  
+  p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #fffbf5;
+  }
+  
+  .lead {
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-bottom: 40px;
+  }
+  

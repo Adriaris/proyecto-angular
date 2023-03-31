@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="row mt-3">
+      <div class="col-md-6">
+        <form #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)" ngNativeValidate>
+          <h1 class="text-center mb-3">Contact</h1>
+          <div class="mb-3">
+            <label for="nombre" class="form-label text-white">Name:</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="contactData.nombre" required>
+            <small *ngIf="!contactForm.controls['nombre'].valid && contactForm.controls['nombre'].touched" class="invalid-feedback d-block">
+              Please enter your name
+            </small>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label text-white">Email:</label>
+            <input type="email" class="form-control" id="email" name="email" [(ngModel)]="contactData.email" required>
+            <small *ngIf="!contactForm.controls['email'].valid && contactForm.controls['email'].touched" class="invalid-feedback d-block">
+              Please enter a valid email address
+            </small>
+          </div>
+          <div class="mb-3">
+            <label for="mensaje" class="form-label text-white">Message:</label>
+            <textarea class="form-control" id="mensaje" name="mensaje" [(ngModel)]="contactData.mensaje" rows="5" required></textarea>
+            <small *ngIf="!contactForm.controls['mensaje'].valid && contactForm.controls['mensaje'].touched" class="invalid-feedback d-block">
+              Please enter a message
+            </small>
+          </div>
+          <button type="submit" class="btn btn-primary" style="background-color: #fd4556; border-color: #fd4556;">Send</button>
+        </form>
+      </div>
+      <div class="col-md-6 mt-5">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2985.227005547442!2d2.1611701152257117!3d41.38506217926117!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4a29c747e94eb%3A0xc83b8a89c4120c56!2sPla%C3%A7a%20de%20la%20Universitat%2C%2008007%20Barcelona%2C%20Spain!5e0!3m2!1sen!2sus!4v1659133586719!5m2!1sen!2sus"
+          width="100%" height="450" style="border: none; border-radius: 10px;" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+  
