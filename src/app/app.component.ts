@@ -1,21 +1,30 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductosService } from './service/productos.service';
+import { UserService } from './services/user.service';
+import { User } from './models/user';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'], 
-  providers: [ProductosService]
+  providers: [UserService]
 })
 export class AppComponent implements OnInit{
   title = 'proyecto-angular';
+  public identity: User | null = null;
+  public token?: string | null;
+  
 
-  productos:any;
-
-  constructor(private producteService:ProductosService){
-
+  constructor(
+    private _userService: UserService
+  ){
+    
   }
   ngOnInit():void{
-    this.productos = this.producteService.getProductos();
+    this.loadUser();
+  }
+
+  loadUser(){
+    this.identity = this._userService.getIdentity() ?? null;
+    this.token = this._userService.getToken() ?? null;
   }
 }

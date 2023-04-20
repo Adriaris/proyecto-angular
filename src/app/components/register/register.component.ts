@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from '../../models/user';
 import { UserService } from 'src/app/services/user.service';
 import { NgForm } from '@angular/forms';
@@ -12,7 +12,7 @@ import { NgForm } from '@angular/forms';
 })
 
 
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
 
   pageTitle: string = 'Register';
   public user: User;
@@ -22,7 +22,7 @@ export class RegisterComponent {
 
   constructor(
     private _userService: UserService
-  ) { //    name-age-nat-desc-email-passwd-avail-ch1-ch2-ch3-amb-sr-tr-rank
+  ) { 
     this.user = new User();
   }
 

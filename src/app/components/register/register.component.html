@@ -1,4 +1,13 @@
 <div class="col-md-6 offset-md-3">
+
+    <div class="alert alert-success mt-3" *ngIf="status == 'success'">
+        You have registered successfully <a [routerLink]="['/login']">Log in here</a>
+    </div>
+
+    <div class="alert alert-danger mt-3" *ngIf="status == 'error'">
+        There has been an error and you have not registered successfully
+    </div>
+
     <form #registerForm="ngForm" (ngSubmit)="onSubmit()" ngNativeValidate>
         <!-- Sección 1: Datos personales -->
         <div *ngIf="currentSection === 0">
@@ -16,10 +25,11 @@
 
             <div class="form-group">
                 <label for="age">Age</label>
-                <input type="date" class="form-control" id="age" name="age" [(ngModel)]="user.age" #age="ngModel" required>
+                <input type="date" class="form-control" id="age" name="age" [(ngModel)]="user.age" #age="ngModel"
+                    required>
                 <small *ngIf="!age.valid && age.touched" class="invalid-feedback d-block">Age is not valid</small>
             </div>
-            
+
 
             <div class="form-group">
                 <label for="nationality">Nationality</label>
@@ -94,8 +104,9 @@
                 <div class="row radioBox">
                     <div class="col-md-4" *ngFor="let role of teamRoles">
                         <div class="form-check">
-                            <input required class="form-check-input" type="radio" id="{{ role.id_trole }}" name="teamRole"
-                                [(ngModel)]="user.id_trole" [value]="role.id_trole" style="margin-top: 1.5em;">
+                            <input required class="form-check-input" type="radio" id="{{ role.id_trole }}"
+                                name="teamRole" [(ngModel)]="user.id_trole" [value]="role.id_trole"
+                                style="margin-top: 1.5em;">
                             <label class="form-check-label" for="{{ role }}">
                                 {{ role.trole }}
                             </label>
@@ -112,8 +123,9 @@
                 <div class="row radioBox">
                     <div class="col-md-4" *ngFor="let role of soloRoles">
                         <div class="form-check">
-                            <input required class="form-check-input" type="radio" id="{{ role.id_srole }}" name="soloRole"
-                                [(ngModel)]="user.id_srole" [value]="role.id_srole" style="margin-top: 1.5em;">
+                            <input required class="form-check-input" type="radio" id="{{ role.id_srole }}"
+                                name="soloRole" [(ngModel)]="user.id_srole" [value]="role.id_srole"
+                                style="margin-top: 1.5em;">
                             <label class="form-check-label" for="{{ role }}">
                                 {{ role.srole }}
                             </label>

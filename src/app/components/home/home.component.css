@@ -1,0 +1,43 @@
+.container {
+    margin-bottom: 20px;
+  }
+  
+  .card {
+    background-color: rgba(217, 217, 217, 0.1);
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .card img {
+    border-radius: 50%;
+    margin-top: 20px;
+  }
+  
+  .info {
+  }
+  
+  .roles {
+
+  }
+  
+  .description {
+
+    text-align: left;
+  }
+  
+  .description p {
+    margin-bottom: 0;
+  }
+  
+  h5,
+  div {
+    color: #fff;
+  }
+  
+  .container {
+    margin: 0 auto;
+    min-width: 500px;
+  }
+  
