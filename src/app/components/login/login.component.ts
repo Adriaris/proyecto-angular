@@ -52,7 +52,11 @@ export class LoginComponent implements OnInit {
                 localStorage.setItem('token', this.token);
                 localStorage.setItem('identity', JSON.stringify(this.identity));
 
-                this._router.navigate(['/']);
+                this._router.navigate(['/']).then(() => {
+                  location.reload();
+                });
+                
+               
 
               } else {
                 this.status = 'error';

@@ -80,6 +80,10 @@ export class UserService {
         let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
         return this._http.post(this.url + 'contact', params, { headers: headers });
       }
+
+      getAllUsers(): Observable<any[]> {
+        return this._http.get<any[]>(this.url +`getallusers`);
+      }
       
 
 

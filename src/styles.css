@@ -74,20 +74,7 @@ html {
 
 /*-----------------------------------------------------------------------------------------*/
 
-footer {
-  /*position: fixed;*/
-  margin-top: 200px;
-  left: 0px;
-  bottom: 0px;
-  height: 80px;
-  width: 100%;
-  background-color: #0f1922;
-  border-top: 1px solid #fffbf5;
-}
 
-footer a:hover {
-  color: #fd4556 !important;
-}
 
 /* Oculta la barra de scroll */
 ::-webkit-scrollbar {

@@ -33,12 +33,27 @@
 
             <div class="form-group">
                 <label for="nationality">Nationality</label>
-                <input type="text" class="form-control" id="nationality" name="nationality"
+                <select class="form-control" id="nationality" name="nationality"
                     [(ngModel)]="user.nationality" #nationality="ngModel" required>
+                    <option *ngFor="let nationality of nationalities" [value]="nationality.code">{{ nationality.name }}</option>
+                </select>
                 <small *ngIf="!nationality.valid && nationality.touched" class="invalid-feedback d-block">
-                    Nationality is not valid
+                    Please choose a nationality.
+                </small>
+              </div>
+              
+
+            <div class="form-group">
+                <label for="availability">Availability</label>
+                <select class="form-control" id="id_availability" name="id_availability" [(ngModel)]="user.id_availability"
+                    #availability="ngModel" required>
+                    <option *ngFor="let option of availabilityOptions" [value]="option.id">{{ option.label }}</option>
+                </select>
+                <small *ngIf="!availability.valid && availability.touched" class="invalid-feedback d-block">
+                    Please choose an availability option.
                 </small>
             </div>
+
 
             <div class="form-group">
                 <label for="short_description">Short description</label>
@@ -92,7 +107,7 @@
             <div class="form-group">
                 <label>Rank</label>
                 <select required class="form-control" [(ngModel)]="user.id_rank" name="selectedRank">
-                    <option *ngFor="let rank of ranks" [value]="rank.id">{{ rank.name }} {{ rank.level }}</option>
+                    <option *ngFor="let rank of ranks" [value]="rank.idRank">{{ rank.gameRank }}</option>
                 </select>
                 <small *ngIf="!user.id_rank" class="invalid-feedback d-block">
                     Please select one rank
@@ -152,12 +167,13 @@
 
             <div class="row">
                 <div class="col-3" *ngFor="let character of characters">
-                    <input required type="checkbox" name="characters" [value]="character.id_character"
-                        (click)="updateSelectedCharacters($event, character.id_character)"
-                        [disabled]="showError && !selectedCharacters.includes(character.id_character)"
-                        [checked]=" selectedCharacters.includes(character.id_character)">
+                    <input required type="checkbox" name="characters" [value]="character.idCharacter"
+                        (click)="updateSelectedCharacters($event, character.idCharacter)"
+                        [disabled]="showError && !selectedCharacters.includes(character.idCharacter)"
+                        [checked]=" selectedCharacters.includes(character.idCharacter)">
                     <label>
-                        {{ character.display_name }}
+                        {{ character.displayName }}
+                        <img [src]="character.imgCharacter" class="small-icon">
                     </label>
                 </div>
                 <div *ngIf="showError" class="text-danger">¡You can only select 3 characters!</div>

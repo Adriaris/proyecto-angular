@@ -15,6 +15,10 @@ import { ContactComponent } from './components/contact/contact.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
+import { PerfilcrudComponent } from './components/perfilcrud/perfilcrud.component';
+import { ChatComponent } from './components/chat/chat.component';
+import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
+import { TermsAndConditionsComponent } from './components/terms-and-conditions/terms-and-conditions.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,11 @@ import { PerfilComponent } from './components/perfil/perfil.component';
     ContactComponent,
     HeaderComponent,
     FooterComponent,
-    PerfilComponent // Agrega el componente ContactComponent a las declaraciones
+    PerfilComponent,
+    PerfilcrudComponent,
+    ChatComponent,
+    PrivacyPolicyComponent,
+    TermsAndConditionsComponent // Agrega el componente ContactComponent a las declaraciones
   ],
   imports: [
     BrowserModule,

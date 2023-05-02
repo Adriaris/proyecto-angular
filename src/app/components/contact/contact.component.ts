@@ -12,6 +12,8 @@ export class ContactComponent implements OnInit {
   pageTitle: string = 'Contact';
   
   public status?: string;
+
+
   contactData = {
     nombre: '',
     email: '',
@@ -22,6 +24,8 @@ export class ContactComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+
 
   onSubmit(contactForm: NgForm) {
     if (contactForm.valid) {

@@ -1,53 +1,63 @@
 <div class="container-fluid no-padding-container-fluid">
-    <!--Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: #0f1922 !important;">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-          <img src="tu-logo.png" width="30" height="24" class="d-inline-block align-text-top" alt="">
-          <span class="ms-2">Playmate</span>
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto navbar-expand justify-content-evenly">
-            <li class="nav-item fs-5">
-              <a class="nav-link" routerLink="/" routerLinkActive="active" style="color: #fffbf5;"><i class="bi bi-house"></i> Home</a>
-            </li>
-            <li class="nav-item fs-5">
-              <a class="nav-link" routerLink="/aboutus" routerLinkActive="active" style="color: #fffbf5;"><i class="bi bi-person-lines-fill"></i> About us</a>
-            </li>
-            <li class="nav-item fs-5">
-              <a class="nav-link" routerLink="/contact" routerLinkActive="active" style="color: #fffbf5;"><i class="bi bi-envelope"></i> Contact</a>
-            </li>
-          </ul>
-  
-          <button class="btn  ms-3 border-0 btn-icon" type="button" data-bs-toggle="offcanvas"
+  <!--Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: #0f1922 !important;">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="tu-logo.png" width="30" height="24" class="d-inline-block align-text-top" alt="">
+        <span class="ms-2">Playmate</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto navbar-expand justify-content-evenly">
+          <li class="nav-item fs-5">
+            <a class="nav-link" routerLink="/" routerLinkActive="active" style="color: #fffbf5;"><i
+                class="bi bi-house"></i> Home</a>
+          </li>
+          <li class="nav-item fs-5">
+            <a class="nav-link" routerLink="/aboutus" routerLinkActive="active" style="color: #fffbf5;"><i
+                class="bi bi-person-lines-fill"></i> About us</a>
+          </li>
+          <li class="nav-item fs-5">
+            <a class="nav-link" routerLink="/contact" routerLinkActive="active" style="color: #fffbf5;"><i
+                class="bi bi-envelope"></i> Contact</a>
+          </li>
+          <li class="nav-item fs-5">
+            <a class="nav-link" routerLink="/chat" routerLinkActive="active" style="color: #fffbf5;"><i
+                class="bi bi-chat-left-dots"></i> Chat</a>
+          </li>
+        </ul>
+
+        <button class="btn  ms-3 border-0 btn-icon" type="button" data-bs-toggle="offcanvas"
           data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
           <i class="bi bi-person-circle"></i>
         </button>
-        
-  
-        </div>
+
+
       </div>
-    </nav>
-  
-    <!--Desplegable de perfil -->
-  
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel"
-      style="background-color: #0f1922; color: #fffbf5;">
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasRightLabel">My Profile</h5>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div class="offcanvas-body">
-        <app-perfil [identity]="identity"></app-perfil>
-      </div>
-      
     </div>
-    <!-- Contenido de la navbar -->
-    
-  
-  
+  </nav>
+
+  <!--Desplegable de perfil -->
+
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel"
+    style="background-color: #0f1922; color: #fffbf5;">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasRightLabel">
+        My Profile
+        <i class="bi bi-pencil-square" (click)="openProfileCrud()" style="color: #fd4556;"></i>
+      </h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <app-perfil [identity]="identity"></app-perfil>
+    </div>
+
   </div>
+  <!-- Contenido de la navbar -->
+
+
+
+</div>

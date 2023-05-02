@@ -1,87 +1,46 @@
-<!--<div class="container">
+<div class="loading-spinner" *ngIf="users.length === 0">
+    <div class="spinner-border text-danger" role="status">
+        <span class="sr-only"></span>
+    </div>
+    <p style="color: #FFFBF5">Loading users...</p>
+</div>
+
+<div class="container">
     <div class="row">
         <div class="col-md-12">
-            <div *ngFor="let user of users" class="card mb-3">
-                <div class="card-header">
-                    <h4>{{user.nickname}}</h4>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h5>Personajes y Países</h5>
+            <div class="card-deck">
+                <div class="row">
+                    <div class="col-md-3" *ngFor="let user of users">
+                        <div class="card">
+                            <img src="../../images/example.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="f32 col-md-3"><span
+                                            class="col-md-3 flag {{ user.nationality | lowercase }}"></span></div>
+                                    <h5 class="card-title col-md-6">{{ user.nickname }}</h5>
+                                    <img class="col-md-3" [src]="user.idRank.imgRank" alt="{{ user.idRank.gameRank }}"
+                                        width="1" height="40">
                                 </div>
-                                <div class="col-md-4" *ngFor="let character of user.characters">
-                                    <img src="{{character}}.jpg" alt="{{character}}">
-                                    <img src="{{user.nationality}}.jpg" alt="{{user.nationality}}">
+                                <div class="row">
+                                    <img class="col-md-3" [src]="user.idFirstCharacter.imgCharacter"
+                                        alt="Character image" width="40" height="40">
+                                    <img class="col-md-3" [src]="user.idSecondCharacter.imgCharacter"
+                                        alt="Character image" width="40" height="40">
+                                    <img class="col-md-3" [src]="user.idThirdCharacter.imgCharacter"
+                                        alt="Character image" width="40" height="40">
+                                </div>
+                                <div class="row">
+                                    <p><b>Roles:</b> {{ user.idSrole.srole }}, {{ user.idTrole.trole }}</p>
+
+                                    <p><b>Ambition:</b> {{ user.idAmbition.ambition }}</p>
+
+                                    <p><b>Availability:</b> {{ user.idAvailability.availability }}</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <img src="{{user.photoUrl}}" alt="{{user.nickname}} Photo" class="rounded img-fluid">
-                        </div>
-                    </div>
-
-                    <hr>
-
-                    <h5>Roles</h5>
-                    <ul>
-                        <li *ngFor="let role of user.roles">{{role}}</li>
-                    </ul>
-
-                    <hr>
-
-                    <h5>Descripción</h5>
-                    <p *ngIf="user.description">{{user.description}}</p>
-                    <p *ngIf="!user.description">No hay descripción disponible para este usuario.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
-
-<div class="container">
-    <div class="row justify-content-center">
-        <div *ngFor="let user of users" class="card mb-3 col-md-3 m-3">
-            <div class="card-header">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="col-md-12">
-                            <h4>{{user.nickname}}</h4>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <img src="{{user.photoUrl}}" alt="{{user.nickname}} Photo" class="rounded img-fluid">
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-3" *ngFor="let character of user.characters">
-                            <img src="{{character}}.jpg" alt="{{character}}">
-                        </div>
-                        <div class="col-md-3">
-                            <img src="{{user.nationality}}.jpg" alt="{{user.nationality}}">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">Roles</div>
-                        <div class="col-md-3" *ngFor="let role of user.roles">
-                            {{role}}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <p *ngIf="user.description">{{user.description}}</p>
-                        <p *ngIf="!user.description">No hay descripción disponible para este usuario.</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <h1>Agents</h1>
-
-    <ul>
-        <li *ngFor="let agent of agents.data">
-            {{ agent.displayName }} - <img [src]="agent.displayIcon">
-        </li>
-    </ul>
+</div>

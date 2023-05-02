@@ -1,0 +1,48 @@
+/* Footer styles */
+footer {
+    font-size: 16px;
+    background-color: rgba(0, 0, 0, 0.7); /* set a background color with opacity */
+    opacity: 0.8; /* set the opacity of the footer itself */
+    margin-top: 70px;
+  }
+  
+  footer a {
+    color: #fff;
+  }
+  
+  footer a:hover {
+    color: #f8f9fa;
+    text-decoration: none;
+  }
+  
+  footer h5 {
+    color: #fff;
+  }
+  
+  footer p {
+    color: #bbb;
+  }
+  
+  footer hr {
+    border-color: #bbb;
+    opacity: 0.25;
+  }
+  
+  footer .list-unstyled li {
+    margin-bottom: 10px;
+  }
+  
+  footer .text-muted {
+    color: #bbb;
+  }
+  
+  footer a {
+    color: #fff;
+    transition: color 0.3s ease; /* agregar una transición suave al cambio de color */
+  }
+  
+  footer a:hover {
+    color: #ff4556; /* cambiar el color a rojo al pasar el cursor sobre el enlace */
+    text-decoration: none;
+  }
+  

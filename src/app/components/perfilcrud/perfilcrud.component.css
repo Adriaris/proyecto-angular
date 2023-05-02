@@ -24,7 +24,7 @@ form {
     border-color: #fd4556;
     box-shadow: none;
   }
-
+  
   h1 {
     font-size: 3rem;
     font-weight: 700;
@@ -39,9 +39,24 @@ form {
     color: #fffbf5;
   }
   
+  label {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 5px;
+    margin-top: 15px;
+    color: #fffbf5;
+  }
+  
   .btn-primary {
     background-color: #fd4556;
     border-color: #fd4556;
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+  
+  .btn-secondary {
+    /*background-color: #fd4556;
+    border-color: #fd4556;*/
     font-size: 1.2rem;
     font-weight: 500;
   }
@@ -51,6 +66,11 @@ form {
     color: #fd4556;
   }
   
+  .btn-secondary:hover {
+    background-color: #fffbf5;
+    color: grey;
+  }
+  
   .btn-primary:focus {
     box-shadow: none;
   }
@@ -58,30 +78,3 @@ form {
   .text-white {
     color: #fffbf5;
   }
-  
-
-  .loading-spinner {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background-color: rgba(255, 255, 255, 0.7);
-    z-index: 9999;
-  }
-  
-  .loading-spinner .spinner-border {
-    width: 3rem;
-    height: 3rem;
-    margin-bottom: 1rem;
-  }
-  
-  .loading-spinner p {
-    font-size: 1.2rem;
-    font-weight: bold;
-  }
-  

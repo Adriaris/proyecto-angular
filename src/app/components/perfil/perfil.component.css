@@ -1,0 +1,11 @@
+.shrink-on-click {
+    font-size: 16px;
+    transition: font-size 0.2s ease-in-out;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .shrink-on-click:active {
+    font-size: 15px;
+  }
+  
