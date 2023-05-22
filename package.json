@@ -31,6 +31,7 @@
     "@angular-devkit/build-angular": "^15.2.1",
     "@angular/cli": "~15.2.1",
     "@angular/compiler-cli": "^15.2.0",
+    "@types/bootstrap": "^5.2.6",
     "@types/jasmine": "~4.3.0",
     "css-loader": "^6.7.3",
     "jasmine-core": "~4.5.0",

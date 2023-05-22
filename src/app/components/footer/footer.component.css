@@ -1,7 +1,7 @@
 /* Footer styles */
 footer {
     font-size: 16px;
-    background-color: rgba(0, 0, 0, 0.7); /* set a background color with opacity */
+    background-color: #0f1922; /* set a background color with opacity */
     opacity: 0.8; /* set the opacity of the footer itself */
     margin-top: 70px;
   }

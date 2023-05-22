@@ -1,0 +1,61 @@
+.profile-image {
+    width: 40px;
+    height: 40px;
+    border: 3px solid transparent;
+    transition: border-color 0.3s ease;
+  }
+  
+  .profile-image:hover {
+    border-color: #fb4556;
+  }
+  
+  .edit-pencil {
+    color: #fd4556;
+    cursor: pointer;
+  }
+  
+  .navbar {
+    background-color: #0f1922;
+    border-bottom: 1px solid #fffbf5;
+  }
+  
+  .navbar-brand {
+    color: #fffbf5;
+  }
+  
+  .navbar-nav .nav-link {
+    color: #fffbf5;
+  }
+  
+  .navbar-nav {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .navbar-nav .nav-link:hover {
+    color: #fd4556 !important;
+  }
+  
+  .no-padding-container-fluid {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+  }
+  
+  .btn-outline-light {
+    color: #fffbf5;
+    border-color: #fffbf5;
+  }
+  
+  .offcanvas {
+    background-color: #0f1922;
+    color: #fffbf5;
+  }
+  
+  .offcanvas .offcanvas-body a {
+    color: #fffbf5;
+  }
+  
+  .offcanvas .offcanvas-body a:hover {
+    color: #fd4556;
+  }

@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './guards/auth.guard'; // Importa el guard de ruta
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -19,6 +20,8 @@ import { PerfilcrudComponent } from './components/perfilcrud/perfilcrud.componen
 import { ChatComponent } from './components/chat/chat.component';
 import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
 import { TermsAndConditionsComponent } from './components/terms-and-conditions/terms-and-conditions.component';
+import { ProfileImageUploadComponent } from './components/profile-image-upload/profile-image-upload.component';
+
 
 @NgModule({
   declarations: [
@@ -35,13 +38,16 @@ import { TermsAndConditionsComponent } from './components/terms-and-conditions/t
     PerfilcrudComponent,
     ChatComponent,
     PrivacyPolicyComponent,
-    TermsAndConditionsComponent // Agrega el componente ContactComponent a las declaraciones
+    TermsAndConditionsComponent,
+    ProfileImageUploadComponent,
+
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [AuthGuard // Agrega el guard de ruta como un provider
   ],

@@ -2,9 +2,8 @@
   <!--Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: #0f1922 !important;">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        <img src="tu-logo.png" width="30" height="24" class="d-inline-block align-text-top" alt="">
-        <span class="ms-2">Playmate</span>
+      <a class="navbar-brand" href="#" style="padding-left: 2rem;">
+        <img src="../../../assets/images/LOGO-PM-16-9.png" width="70" height="40" class="d-inline-block align-text-top" alt="">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,11 +29,10 @@
           </li>
         </ul>
 
-        <button class="btn  ms-3 border-0 btn-icon" type="button" data-bs-toggle="offcanvas"
+        <button class="btn ms-3 border-0 btn-icon" type="button" data-bs-toggle="offcanvas"
           data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-          <i class="bi bi-person-circle"></i>
+          <img [src]="profileImage" alt="Profile Image" class="profile-image rounded-circle">
         </button>
-
 
       </div>
     </div>
@@ -47,7 +45,7 @@
     <div class="offcanvas-header">
       <h5 class="offcanvas-title" id="offcanvasRightLabel">
         My Profile
-        <i class="bi bi-pencil-square" (click)="openProfileCrud()" style="color: #fd4556;"></i>
+        <i class="bi bi-pencil-square edit-pencil" (click)="openProfileCrud()"></i>
       </h5>
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>

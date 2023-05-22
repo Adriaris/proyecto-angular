@@ -1,3 +1,47 @@
+
+
+.navbar-custom {
+  background-color: #0c141b !important;
+  color: white !important;
+
+  border-radius: 4px;
+}
+
+.select-custom {
+  background-color: #0F1922;
+  color: white;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.select-custom option {
+  color: black;
+  background-color: white;
+}
+
+.select-custom:after {
+  content: '\25BC'; /* Código Unicode para la flecha hacia abajo */
+  color: #FD4556; /* Cambia este valor al color deseado para la flecha */
+  position: absolute;
+  top: 50%;
+  right: 0.5rem;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.btn-filter{
+  font-size: 1rem;
+  color: #FFFBF5;
+  background-color: #FD4556;
+  border: none;
+  border-radius: 4px;
+  
+}
+
+
+
 .loading-spinner {
   display: flex;
   flex-direction: column;
@@ -17,32 +61,35 @@
   font-weight: bold;
 }
 
-
-
-
 .card-container {
   margin-right: 10px;
   margin-left: 10px;
 }
 
 .card {
-  background-color: #0F1922;
-  color: #FFFBF5;
+  background-color: #0c141b;
+  color: #bbbbbb;
   border: none;
   border-radius: 10px;
-  box-shadow: 0px 0px 0px 4px rgba(255,255,255,0.9); /* sombra roja */
+  /*box-shadow: 0px 0px 30px 1px rgba(255, 255, 255, 0.05);*/
   width: 18rem;
+  height: 400px;
   margin: 1rem;
-  transition: all 0.2s ease-in-out; /* Transición suave al cambiar el borde */
+  transition: all 0.2s ease-in-out;
+  /* Transición suave al cambiar el borde */
+
 }
 
 .card:hover {
-  box-shadow: 0px 0px 0px 4px rgba(253,69,86,0.9); /* sombra roja */
+  box-shadow: 0px 0px 0px 2px rgba(253, 69, 86, 0.9);
+  /* sombra roja */
+  
   transform: scale(1.01);
+  cursor: pointer;
 }
 
 .card-img-top {
-  background-image: url('../../images/example.jpg');
+  /*background-image: url('../../images/profile-img/default.jpg');*/
   height: 10rem;
   object-fit: cover;
   border-radius: 10px 10px 0 0;
@@ -51,43 +98,153 @@
 
 .card-body {
   text-align: left;
-  padding-bottom: 0; /* Padding inferior de 0.5rem */
+  /* Padding inferior de 0.5rem */
 }
 
 .card-title {
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: bold;
-  margin-bottom: 0.5rem;
+  padding-top: 10px;
   color: #FD4556;
+
+  /* Agrega la fuente que deseas */
+  font-family: 'Raleway', sans-serif;
 }
+
 
 .card-text {
   font-size: 1rem;
   margin-bottom: 1rem;
 }
 
-.btn {
+.add-friend-btn {
   font-size: 1rem;
   color: #FFFBF5;
   background-color: #FD4556;
   border: none;
   border-radius: 4px;
   padding: 10px;
-  transition: all 0.2s ease-in-out;
+ 
 }
 
-.btn:hover {
-  background-color: transparent;
-  color: #FD4556;
-  cursor: pointer;
+.btn-success{
+  background-color:  rgba(0, 255, 0, 0.1);
+  border-color: #FFFBF5;
+  pointer-events: none;
+ 
+  
 }
 
-/* Fondo de las rows */
 .card-body>.row {
+  background-color: #0F1922;
+  padding: 10px;
+  margin: 3px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.bg-col {
+  background-color: #0F1922;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  padding-right: 0px;
+
+  margin: 15px;
+  margin-bottom: 0px;
+  border-radius: 10px;
+}
+
+
+.bg-row-modal {
   background-color: #0c141b;
   padding: 10px;
-  margin: 0 -10px; /* Eliminar el espacio horizontal adicional */
-  margin-bottom: 10px; /* Margen inferior de 20px */
-  border-radius: 10px; /* Esquinas redondeadas de 10px */
+  margin: 0 -10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
 }
+
+.bg-col-modal {
+  background-color: #0c141b;
+  padding: 10px;
+  margin: 5px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.modal-dialog {
+  max-width: 400px;
+}
+
+.modal-content {
+  background-color: #0F1922;
+  color: #FFFBF5;
+  border-radius: 10px;
+  /*box-shadow: 0px 0px 0px 1px rgba(255,255,255,0.9);*/
+}
+
+.modal-header {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.modal-title {
+  color: #FD4556;
+  font-size: 1.5rem;
+}
+
+.modal-body {
+  text-align: left;
+  background-color: #0F1922;
+  color: #FFFBF5;
+  padding-top: 0;
+}
+
+.close-modal {
+  background-color: transparent;
+  color: #FD4556;
+  font-size: 16px;
+  padding-top: 0px;
+}
+
+
+
+/*----*/
+
+.gray-italic {
+  color: #999;
+  font-style: italic;
+}
+
+.progress {
+  background-color: #999;
+}
+
+/*.add-friend-btn span {
+  display: none;
+}
+
+.add-friend-btn:hover span {
+  display: inline-block;
+}*/
+
+
+.report-user-btn  {
+  background-color: #FFA500;
+}
+/*.report-user-btn span {
+  display: none;
+}
+
+.report-user-btn:hover span {
+  display: inline-block;
+}*/
+
+.modal-open {
+  background-color: rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+}
+
+
 

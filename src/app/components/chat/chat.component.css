@@ -1,103 +1,90 @@
-.container {
-    max-width: 1200px;
-    margin: 80px auto 0 auto;
-  }
-  
-  .friend-container,
-  .chat-container {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    margin-bottom: 30px;
-    padding: 30px;
-    border: 1px solid #fff;
-  }
-  
-  .friend-container {
-    margin-right: 10px;
-  }
-  
-  .chat-container {
-    margin-left: 10px;
-  }
-  
-  .friend-container h2,
-  .chat-container h2 {
-    color: #fff;
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin: 0 0 20px 0;
-    text-transform: uppercase;
-  }
-  
-  .friend-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .friend-list li {
-    padding: 10px 20px;
-    background-color: rgba(255, 255, 255, 0.15);
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-  }
-  
-  .friend-list li:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-  }
-  
-  .friend-list li.active {
-    background-color: rgba(0, 0, 0, 0.1);
-    font-weight: 700;
-  }
-  
-  .chat {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .chat li {
-    display: flex;
-    margin-bottom: 20px;
-  }
-  
-  .chat img {
-    border-radius: 50%;
-    height: 40px;
-    margin-right: 10px;
-    width: 40px;
-  }
-  
-  .chat .message {
-    border-radius: 20px;
-    font-size: 16px;
-    padding: 10px 15px;
-    color: #fff;
-  }
-  
-  .chat .message.outgoing {
-    background-color: rgba(253, 69, 86, 0.1);
-    margin-left: auto;
-    border: 2px solid #fd4556;
-  }
-  
-  .chat .message.outgoing .time {
-    color: #ddd;
-    font-size: 12px;
-    margin-left: 10px;
-  }
-  
-  .chat .message.incoming {
-    background-color: rgba(255, 251, 245, 0.1);
-    color: #fff;
-    margin-right: auto;
-    border: 2px solid #fffbf5;
-  }
-  
-  .chat .message.incoming .time {
-    color: #ddd;
-    font-size: 12px;
-    margin-right: 10px;
-  }
-  
+.chat-container {
+  display: flex;
+  height: 100%;
+  background-color: #f8f8f8;
+}
+
+.friends-container {
+  flex-basis: 25%;
+  height: 100%;
+  padding: 1rem;
+  border-right: 1px solid #dcdcdc;
+  overflow-y: scroll;
+}
+
+.friend-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.friend {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.friend img {
+  width: 50px;
+  height: 50px;
+  margin-right: 1rem;
+  border-radius: 50%;
+}
+
+.chat-content-container {
+  flex-basis: 75%;
+  height: 100%;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-content {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-grow: 1;
+  overflow-y: scroll;
+}
+
+.chat-message {
+  margin-bottom: 1rem;
+}
+
+.message-author {
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+
+.message-sent {
+  text-align: right;
+}
+
+.chat-form {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.chat-form input {
+  flex-grow: 1;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  margin-right: 1rem;
+}
+
+.chat-form button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  background-color: #2196f3;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.chat-form button:hover {
+  background-color: #1976d2;
+}

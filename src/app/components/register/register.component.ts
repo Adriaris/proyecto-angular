@@ -6,12 +6,14 @@ import { HttpClient } from '@angular/common/http';
 import { CharacterService } from 'src/app/services/character.service';
 import { RankService } from 'src/app/services/rank.service';
 
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
   providers: [UserService]
 })
+
 export class RegisterComponent implements OnInit {
 
   pageTitle: string = 'Register';
@@ -22,10 +24,12 @@ export class RegisterComponent implements OnInit {
 
   selectedCharacters: number[] = [];
   showError: boolean = false;
+  errorMessage: string = '';
   agents: any;
   characters: any[] = [];
   ranks: any[] = [];
   nationalities: any[] = [];
+  alertMessage: string | null = null;
 
   constructor(
     private _userService: UserService,
@@ -57,7 +61,6 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(): void {
 
-    // Here you can define the form submission logic
     this.user.id_first_character = this.selectedCharacters[0];
     this.user.id_second_character = this.selectedCharacters[1];
     this.user.id_third_character = this.selectedCharacters[2];
@@ -72,14 +75,17 @@ export class RegisterComponent implements OnInit {
 
         } else {
           this.status = 'error';
+          this.errorMessage = response.message; // set the error message
           console.log(response);
         }
       },
       error => {
         this.status = 'error';
+        this.errorMessage = "Unexpected error"; // set the error message
         console.log(error)
       }
     )
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 
     console.log(this.user); // For example, log the user object to the console
   }
@@ -93,64 +99,73 @@ export class RegisterComponent implements OnInit {
     this.currentSection--;
   }
 
-  updateSelectedCharacters(event: any, idCharacter: number) {
-    //debugger
-    if (event.target.checked) {
-      // Agregar el id del personaje seleccionado al array
-      this.selectedCharacters.push(idCharacter);
-      // Si el usuario seleccionó más de 3 personajes, mostrar un mensaje de error
-      if (this.selectedCharacters.length > 3) {
-        this.showError = true;
-        // Desmarcar el checkbox seleccionado
-        event.target.checked = false;
-        // Eliminar el id del personaje seleccionado del array
-        this.selectedCharacters.pop();
-      }
-    } else {
-      // Eliminar el id del personaje deseleccionado del array
-      const index = this.selectedCharacters.indexOf(idCharacter);
-      if (index !== -1) {
-        this.selectedCharacters.splice(index, 1);
-      }
-      // Ocultar el mensaje de error si el usuario seleccionó menos de 4 personajes
-      if (this.showError && this.selectedCharacters.length <= 3) {
-        this.showError = false;
-      }
-    }
-  }
-
   clearErrorMessages() {
     this.showError = false;
   }
 
-  //------------------------------------------------------------
-  availabilityOptions = [
-    { id: 3, label: 'All day' },
-    { id: 1, label: 'Morning (AM)' },
-    { id: 2, label: 'Afternoon (PM)' },
-  ];
+  showPassword = false;
 
-  ambitions = [
-    { id: 1, name: 'Unrated' },
-    { id: 2, name: 'Competitive' },
-    { id: 3, name: 'Online Tournaments' },
-    { id: 4, name: 'Local LANs' },
-    { id: 5, name: 'International LANs' }
-  ];
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
 
-  teamRoles = [
-    { id_trole: 1, trole: 'Leader' },
-    { id_trole: 2, trole: 'Strategist' },
-  ];
+  updateSelection(character: any) {
+    const index = this.selectedCharacters.indexOf(character.idCharacter);
+    if (index === -1 && this.selectedCharacters.length >= 3) {
+      // Si ya hay 3 personajes seleccionados, muestra un mensaje de error
+      this.alertMessage = 'You can only select 3 characters.';
+      setTimeout(() => {
+        this.alertMessage = null;
+      }, 3000);
+      return;
+    }
+  
+    // Agrega o quita el personaje de la lista de personajes seleccionados
+    if (index === -1) {
+      this.selectedCharacters.push(character.idCharacter);
+    } else {
+      this.selectedCharacters.splice(index, 1);
+    }
+  }
+  
+  isSelected(character: any): boolean {
+    return this.selectedCharacters.includes(character.idCharacter);
+  }
 
-  soloRoles = [
-    { id_srole: 1, srole: 'Entry' },
-    { id_srole: 2, srole: 'Operator' },
-    { id_srole: 3, srole: 'Support' },
-    { id_srole: 4, srole: 'Passive' },
-    { id_srole: 5, srole: 'Initiator' },
-    { id_srole: 6, srole: 'Duelist' },
-    { id_srole: 7, srole: 'Sentinel' },
-    { id_srole: 8, srole: 'Controller' },
-  ];
+
+//------------------------------------------------------------
+availabilityOptions = [
+  { id: 3, label: 'All day' },
+  { id: 1, label: 'Morning (AM)' },
+  { id: 2, label: 'Afternoon (PM)' },
+];
+
+ambitions = [
+  { id: 1, name: 'Unrated' },
+  { id: 2, name: 'Competitive' },
+  { id: 3, name: 'Online Tournaments' },
+  { id: 4, name: 'Local LANs' },
+  { id: 5, name: 'International LANs' }
+];
+
+teamRoles = [
+  { id_trole: 1, trole: 'Leader' },
+  { id_trole: 2, trole: 'Strategist' },
+];
+
+soloRoles = [
+  { id_srole: 1, srole: 'Entry' },
+  { id_srole: 2, srole: 'Operator' },
+  { id_srole: 3, srole: 'Support' },
+  { id_srole: 4, srole: 'Passive' },
+  { id_srole: 5, srole: 'Initiator' },
+  { id_srole: 6, srole: 'Duelist' },
+  { id_srole: 7, srole: 'Sentinel' },
+  { id_srole: 8, srole: 'Controller' },
+];
+
+    //------------------------------------------------------------
+
+
+
 }

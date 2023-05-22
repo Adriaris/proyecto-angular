@@ -1,3 +1,90 @@
+<div class="container p-3">
+    <!--Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-custom">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarFilter"
+                aria-controls="navbarFilter" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarFilter">
+                <form [formGroup]="filterForm" (ngSubmit)="applyFilters()" class="d-flex">
+                    <ul class="navbar-nav navbar-expand">
+                        <li class="nav-item fs-5 m-1">
+                            <div class="input-group">
+                                <select class="form-select select-custom" id="nationality"
+                                    formControlName="nationality">
+                                    <option value="" selected>Nationalities</option>
+                                    <option *ngFor="let nat of nationalities" [value]="nat.code">{{ nat.name }}</option>
+                                </select>
+                            </div>
+                        </li>
+                        <li class="nav-item fs-5 m-1">
+                            <div class="input-group">
+                                <select class="form-select select-custom" id="availability"
+                                    formControlName="availability">
+                                    <option value="" selected>Availability</option>
+                                    <option *ngFor="let option of availabilityOptions" [value]="option.id">{{
+                                        option.label }}</option>
+                                </select>
+                            </div>
+                        </li>
+                        <li class="nav-item fs-5 m-1">
+                            <div class="input-group">
+                                <select class="form-select select-custom" id="character" formControlName="character">
+                                    <option value="" selected>Characters</option>
+                                    <option *ngFor="let character of characters" [value]="character.idCharacter">{{
+                                        character.displayName }}</option>
+                                </select>
+                            </div>
+                        </li>
+                        <li class="nav-item fs-5 m-1">
+                            <div class="input-group">
+                                <select class="form-select select-custom" id="sRole" formControlName="sRole">
+                                    <option value="" selected>Solo roles</option>
+                                    <option *ngFor="let role of soloRoles" [value]="role.id_srole">{{ role.srole }}
+                                    </option>
+                                </select>
+                            </div>
+                        </li>
+                        <li class="nav-item fs-5 m-1">
+                            <div class="input-group">
+                                <select class="form-select select-custom" id="tRole" formControlName="tRole">
+                                    <option value="" selected>Team roles</option>
+                                    <option *ngFor="let role of teamRoles" [value]="role.id_trole">{{ role.trole }}
+                                    </option>
+                                </select>
+                            </div>
+                        </li>
+                        <li class="nav-item fs-5 m-1">
+                            <div class="input-group">
+                                <select class="form-select select-custom" id="rank" formControlName="rank">
+                                    <option value="" selected>Rank</option>
+                                    <option *ngFor="let rank of ranks" [value]="rank.idRank">{{ rank.gameRank }}
+                                    </option>
+                                </select>
+                            </div>
+                        </li>
+                        <li class="nav-item fs-5 m-1">
+                            <div class="input-group">
+                                <button type="submit" class="btn btn-filter">Filter</button>
+                            </div>
+                        </li>
+                    </ul>
+                </form>
+
+            </div>
+        </div>
+    </nav>
+</div>
+
+
+
+
+
+<!-- Resto del contenido del componente -->
+
+
+
 <div class="loading-spinner" *ngIf="users.length === 0">
     <div class="spinner-border text-danger" role="status">
         <span class="sr-only"></span>
@@ -5,39 +92,170 @@
     <p style="color: #FFFBF5">Loading users...</p>
 </div>
 
-<div class="container">
+<div class="container pt-3">
     <div class="row">
         <div class="col-md-12">
             <div class="card-deck">
                 <div class="row">
-                    <div class="col-md-3" *ngFor="let user of users">
-                        <div class="card">
-                            <img src="../../images/example.jpg" class="card-img-top" alt="...">
+                    <div class="col-md-3" *ngFor="let user of (showFilteredUsers ? filteredUsers : users)">
+                        <div class="card" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                            (click)="onCardClick(user)">
+                            <div class="row bg-col">
+                                <div class="col-4">
+                                    <img [src]="user.profileImg" class="rounded-circle" alt="..."
+                                        style="width: 75px; height:75px;">
+                                </div>
+                                <div class="col-8 pl-3">
+                                    <h5 class="card-title col-md-10">{{ user.nickname }}</h5>
+                                    <div class="row">
+                                        <div class="f32 col-md-3"><span
+                                                class="col-md-3 flag {{ user.nationality | lowercase }}"></span></div>
+                                        <div class="col-8 pt-1">
+                                            <span>{{ getAge(user.age) }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--<img class="col-md-3" [src]="user.idRank.imgRank" alt="{{ user.idRank.gameRank }}">-->
+                            </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="f32 col-md-3"><span
-                                            class="col-md-3 flag {{ user.nationality | lowercase }}"></span></div>
-                                    <h5 class="card-title col-md-6">{{ user.nickname }}</h5>
-                                    <img class="col-md-3" [src]="user.idRank.imgRank" alt="{{ user.idRank.gameRank }}"
-                                        width="1" height="40">
-                                </div>
-                                <div class="row">
                                     <img class="col-md-3" [src]="user.idFirstCharacter.imgCharacter"
-                                        alt="Character image" width="40" height="40">
+                                        alt="Character image">
                                     <img class="col-md-3" [src]="user.idSecondCharacter.imgCharacter"
-                                        alt="Character image" width="40" height="40">
+                                        alt="Character image">
                                     <img class="col-md-3" [src]="user.idThirdCharacter.imgCharacter"
-                                        alt="Character image" width="40" height="40">
+                                        alt="Character image">
+                                    <img class="col-md-3" [src]="user.idRank.imgRank" alt="{{ user.idRank.gameRank }}">
                                 </div>
                                 <div class="row">
                                     <p><b>Roles:</b> {{ user.idSrole.srole }}, {{ user.idTrole.trole }}</p>
-
                                     <p><b>Ambition:</b> {{ user.idAmbition.ambition }}</p>
-
                                     <p><b>Availability:</b> {{ user.idAvailability.availability }}</p>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade modal-open" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="col-11 bg-row-modal">
+                        <h5 class="modal-title f32" id="exampleModalLabel" *ngIf="selectedUser">
+                            <span class="col-md-3 flag {{ selectedUser.nationality | lowercase }}"></span>
+                            {{selectedUser.nickname }}
+                        </h5>
+                    </div>
+                    <div class="col-1">
+                        <button type="button" class="btn close-modal" data-bs-dismiss="modal"><i
+                                class="bi bi-x-lg"></i></button>
+                    </div>
+                </div>
+                <div class="modal-body" *ngIf="selectedUser">
+                    <div class="row gray-italic bg-row-modal">
+                        <p>{{ selectedUser.shortDescription }}</p>
+                    </div>
+                    <div>
+                        <div class="row">
+                            <div class="col-6 bg-col-modal d-flex justify-content-center align-items-center">
+                                <img [src]="selectedUser.idFirstCharacter.imgCharacter" alt="Character image" width="40"
+                                    height="40" class="mx-2">
+
+                                <img [src]="selectedUser.idSecondCharacter.imgCharacter" alt="Character image"
+                                    width="40" height="40" class="mx-2">
+
+                                <img [src]="selectedUser.idThirdCharacter.imgCharacter" alt="Character image" width="40"
+                                    height="40" class="mx-2">
+
+                            </div>
+                            <div class="col-2 bg-col-modal">
+                                <p><i class="bi bi-calendar4"></i> {{ getAge(selectedUser.age) }}</p>
+                            </div>
+                            <div class="col-2 bg-col-modal">
+                                <img [src]="selectedUser.idRank.imgRank" alt="{{ selectedUser.idRank.gameRank }}"
+                                    width="40" height="40">
+                            </div>
+                        </div>
+                        <div class="row bg-row-modal">
+                            <div class="col-3">
+                                <p> {{ selectedUser.idSrole.srole }} </p>
+                            </div>
+                            <div class="col-3">
+                                <p>{{ selectedUser.idTrole.trole }}</p>
+                            </div>
+                            <div class="col-6">
+                                <p>{{ selectedUser.idAmbition.ambition }}</p>
+                            </div>
+                        </div>
+                        <div class="row bg-row-modal">
+                            <div class="col">
+                                <p>Mornings:</p>
+                                <div class="progress">
+                                    <div class="progress-bar bg-success" role="progressbar"
+                                        [style.width.%]="selectedUser.idAvailability.idAvailability === 1 ? 100 : 0"
+                                        aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+                                        {{ getAvailabilityTextMorning() }}
+                                    </div>
+                                    <div class="progress-bar bg-success" role="progressbar"
+                                        [style.width.%]="selectedUser.idAvailability.idAvailability === 3 ? 100 : 0"
+                                        aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+                                        {{ getAvailabilityTextMorning() }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <p>Afternoons:</p>
+                                <div class="progress">
+                                    <div class="progress-bar bg-success" role="progressbar"
+                                        [style.width.%]="selectedUser.idAvailability.idAvailability === 2 ? 100 : 0"
+                                        aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+                                        {{ getAvailabilityTextAfternoon() }}
+                                    </div>
+                                    <div class="progress-bar bg-success" role="progressbar"
+                                        [style.width.%]="selectedUser.idAvailability.idAvailability === 3 ? 100 : 0"
+                                        aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+                                        {{ getAvailabilityTextAfternoon() }}
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer d-flex justify-content-between align-items-center">
+                    <button type="button" class="btn report-user-btn">
+                        <i class="bi bi-exclamation-diamond-fill"></i>
+                        <span> &nbsp;Report</span>
+                    </button>
+                    <div *ngIf="loading">
+                        <div class="spinner-border text-danger" role="status">
+                            <span class="sr-only"></span>
+                        </div>
+
+                    </div>
+                    <div *ngIf="!loading">
+                        <button type="button" class="btn add-friend-btn" (click)="onAddFriendClick()"
+                            *ngIf="!isFriendRequestSent && !isFriend; else sent">
+                            <span> Add Friend&nbsp;</span>
+                            <i class="bi bi-person-fill-add"></i>
+                        </button>
+                        <ng-template #sent>
+                            <button type="button" class="btn btn-success" *ngIf="isFriend">
+                                <span> Friends&nbsp;</span>
+                                <i class="bi bi-check-lg"></i>
+                            </button>
+                            <button type="button" class="btn btn-success" *ngIf="isFriendRequestSent && !isFriend">
+                                <span> Sended&nbsp;</span>
+                                <i class="bi bi-check-lg"></i>
+                            </button>
+                        </ng-template>
                     </div>
                 </div>
             </div>

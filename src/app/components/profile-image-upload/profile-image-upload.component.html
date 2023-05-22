@@ -1,0 +1,22 @@
+<div class="row bg-row">
+    <div class="col-md-5">
+        <div class="current-image-container">
+            <img [src]="profileImage" alt="Current Image"
+                class="current-image">
+        </div>
+    </div>
+    <div class="col-md-7">
+        <div class="upload-instructions">
+            <h4>Upload Profile Image</h4>
+            <p>Choose an image file from your device to set as your profile picture.</p>
+            <p>The image should be in JPEG or PNG format and not exceed 5MB in size.</p>
+            <p>Click the button below to select an image:</p>
+            <div class="file-input">
+                <input type="file" name="profileImg" id="profileImg" (change)="onFileChange($event)">
+                <label for="profileImg" class="file-input-label">Select Image</label>
+            </div>
+        </div>
+    </div>
+
+      
+</div>

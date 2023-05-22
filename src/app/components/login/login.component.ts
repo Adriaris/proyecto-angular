@@ -55,9 +55,6 @@ export class LoginComponent implements OnInit {
                 this._router.navigate(['/']).then(() => {
                   location.reload();
                 });
-                
-               
-
               } else {
                 this.status = 'error';
               }

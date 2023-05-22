@@ -1,0 +1,79 @@
+/* Añade estos estilos al archivo profile-image-upload.component.css */
+
+.current-image-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+  }
+  
+  .current-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+  }
+
+  .bg-row {
+    background-color: #0c141b;
+    padding: 10px;
+    margin: 0 -10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+  }
+  
+  .upload-instructions {
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .upload-instructions h4 {
+    margin-top: 0;
+    font-size: 24px;
+    color: #fff;
+  }
+  
+  .upload-instructions p {
+    font-size: 16px;
+    color: #cdcccc;
+    margin-bottom: 10px;
+  }
+  
+  .file-input {
+    position: relative;
+  }
+  
+  .file-input input[type="file"] {
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+  
+  .file-input-label {
+    background-color: #fd4556;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 16px;
+  }
+  
+  .file-input-label:hover {
+    background-color: #fffbf5;
+    color: #fd4556;
+  }
+  
+  .file-input-label:focus {
+    outline: none;
+    box-shadow: none;
+  }
+  
+  .file-input-label:active {
+    transform: translateY(1px);
+  }
+  

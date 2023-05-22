@@ -1,1 +1,198 @@
-<p>perfilcrud works!</p>
+<ng-container *ngIf="loading; else content">
+    <div class="loading-spinner">
+        <div class="spinner-border text-danger" role="status">
+            <span class="sr-only"></span>
+        </div>
+        <p style="color: #FFFBF5">Loading user...</p>
+    </div>
+</ng-container>
+
+<ng-template #content>
+    <div class="col-md-6 offset-md-3">
+
+        <div class="alert alert-success mt-3" *ngIf="status == 'success'">
+            Your profile has been successfully edited.
+        </div>
+
+        <div class="alert alert-danger mt-3" *ngIf="status == 'error'">
+            There has been an error and your profile could not be modified correctly.
+            <br>
+            <strong>{{ errorMessage }}</strong>
+        </div>
+
+
+        <div class="form-group form-padding pb-0">
+            <!-- Resto del contenido del componente ProfileCrudComponent -->
+            <h3>Profile picture</h3>
+            <app-profile-image-upload></app-profile-image-upload>
+        </div>
+
+
+        <form #registerForm="ngForm" class="form-padding" (ngSubmit)="onSubmit()" ngNativeValidate>
+            <!-- Sección 1: Datos personales -->
+
+            <h3>User Data</h3>
+            
+            <!-- Campos de datos personales -->
+
+            <div class="form-group">
+                <label for="nickname">Nickname:</label>
+                <input type="text" class="form-control" name="nickname" id="nickname" [(ngModel)]="user.nickname"
+                    required maxlength="20">
+                <div *ngIf="registerForm.controls['nickname'].invalid && registerForm.controls['nickname'].touched">
+                    <span class="text-danger">Nickname is required and must be no longer than 20 characters.</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="age">Age:</label>
+                        <input type="date" class="form-control" name="age" id="age"
+                            [ngModel]="user.age | date:'yyyy-MM-dd'" (ngModelChange)="user.age = $event">
+                        <div *ngIf="registerForm.controls['age'].invalid && registerForm.controls['age'].touched">
+                            <span class="text-danger">Invalid age.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="nationality">Nationality:</label>
+                        <select class="form-control" name="nationality" id="nationality" [(ngModel)]="user.nationality"
+                            required>
+                            <option *ngFor="let nat of nationalities" [value]="nat.code">{{nat.name}}
+                            </option>
+                        </select>
+                        <div
+                            *ngIf="registerForm.controls['nationality'].invalid && registerForm.controls['nationality'].touched">
+                            <span class="text-danger">Nationality is required.</span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="availability">Availability:</label>
+                        <select class="form-control" name="availability" id="availability"
+                            [(ngModel)]="user.id_availability" required>
+                            <option *ngFor="let option of availabilityOptions" [value]="option.id">{{ option.label }}
+                            </option>
+                        </select>
+                        <div
+                            *ngIf="registerForm.controls['availability'].invalid && registerForm.controls['availability'].touched">
+                            <span class="text-danger">You must select a valid availability option.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="short_description">Short Description:</label>
+                <textarea class="form-control" name="short_description" id="short_description"
+                    [(ngModel)]="user.short_description" maxlength="200"></textarea>
+                <div
+                    *ngIf="registerForm.controls['short_description'].invalid && registerForm.controls['short_description'].touched">
+                    <span class="text-danger">The short description must not exceed 200 characters.</span>
+                </div>
+            </div>
+
+            <!--<div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" name="email" id="email" [(ngModel)]="user.email" required
+                    maxlength="50" email>
+                <div *ngIf="registerForm.controls['email'].invalid && registerForm.controls['email'].touched">
+                    <span class="text-danger">The email is required and must not exceed 50 characters.</span>
+                </div>
+            </div>-->
+
+            <!--<div class="form-group">
+            <label for="password">Password:</label>
+            <div class="input-group">
+                <input type="{{ showPassword ? 'text' : 'password' }}" class="form-control" name="password"
+                    id="password" [(ngModel)]="user.passwd" required minlength="8"
+                    pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" #passwordInput>
+                <div class="password-toggle-container">
+                    <button class="btn btn-outline-secondary password-toggle" type="button"
+                        (click)="togglePasswordVisibility()">
+                        <i class="bi" [ngClass]="{ 'bi-eye': !showPassword, 'bi-eye-slash': showPassword }"></i>
+                    </button>
+                </div>
+            </div>
+            <div *ngIf="registerForm.controls['password'].invalid && registerForm.controls['password'].touched">
+                <span class="text-danger">The password is required and must be at least 8 characters long, contain
+                    at least one uppercase letter, one lowercase letter, one number, and one special character (@ $
+                    ! % * ? &).</span>
+            </div>
+        </div>-->
+
+            <div class="form-group">
+                <label for="ambition">Ambition:</label>
+                <select class="form-control" id="ambition" name="ambition" [(ngModel)]="user.id_ambition" required>
+                    <option *ngFor="let ambition of ambitions" [value]="ambition.id">{{ ambition.name }}</option>
+                </select>
+                <div *ngIf="registerForm.controls['ambition'].invalid && registerForm.controls['ambition'].touched">
+                    <span class="text-danger">Please select an option for Ambition.</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="ranks">Ranks:</label>
+                <select class="form-control" id="ranks" name="ranks" [(ngModel)]="user.id_rank" required>
+                    <option *ngFor="let rank of ranks" [value]="rank.idRank">{{ rank.gameRank }}</option>
+                </select>
+                <div *ngIf="registerForm.controls['ranks'].invalid && registerForm.controls['ranks'].touched">
+                    <span class="text-danger">Please select an option for Ranks.</span>
+                </div>
+            </div>
+
+            <div class="form-row row">
+                <div class="form-group col-md-6">
+                    <label for="team-roles">Team Roles:</label>
+                    <select class="form-control" id="team-roles" name="teamRoles" [(ngModel)]="user.id_trole" required>
+                        <option *ngFor="let role of teamRoles" [value]="role.id_trole">{{ role.trole }}</option>
+                    </select>
+                    <div
+                        *ngIf="registerForm.controls['teamRoles'].invalid && registerForm.controls['teamRoles'].touched">
+                        <span class="text-danger">Please select a team role.</span>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="solo-roles">Solo Roles:</label>
+                    <select class="form-control" id="solo-roles" name="soloRoles" [(ngModel)]="user.id_srole" required>
+                        <option *ngFor="let role of soloRoles" [value]="role.id_srole">{{ role.srole }}</option>
+                    </select>
+                    <div
+                        *ngIf="registerForm.controls['soloRoles'].invalid && registerForm.controls['soloRoles'].touched">
+                        <span class="text-danger">Please select a solo role.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Characters:</label>
+                <div class="alert alert-danger mt-3" *ngIf="alertMessage">
+                    {{alertMessage}}
+                </div>
+                <div class="row">
+                    <div class="col-2" *ngFor="let character of characters">
+                        <div class="character-button">
+                            <button type="button" class="btn character-image-button"
+                                [class.selected]="isSelected(character)" (click)="updateSelection(character)">
+                                <img [src]="character.imgCharacter" alt="{{ character.nameCharacter }}"
+                                    class="character-image">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group text-right mt-3 row">
+                <div class="col-6 d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary"
+                        [disabled]="!registerForm.valid || selectedCharacters.length !== 3">Edit</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</ng-template>

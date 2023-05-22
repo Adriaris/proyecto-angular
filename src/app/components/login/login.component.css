@@ -38,6 +38,12 @@ form {
     margin-bottom: 20px;
     color: #fffbf5;
   }
+  span {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #fffbf5;
+  }
   
   label {
     font-size: 1.2rem;
