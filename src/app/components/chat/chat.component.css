@@ -1,90 +1,67 @@
-.chat-container {
-  display: flex;
-  height: 100%;
-  background-color: #f8f8f8;
+.btn-chat{
+  background-color: #0F1922;
+  color: white;
+  border: none;
+  outline: none;
+  box-shadow: none;
 }
-
-.friends-container {
-  flex-basis: 25%;
-  height: 100%;
-  padding: 1rem;
-  border-right: 1px solid #dcdcdc;
-  overflow-y: scroll;
-}
-
-.friend-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.friend {
-  display: flex;
-  align-items: center;
-  margin-bottom: 1rem;
+.btn-chat:hover{
+  color:#FD4556;
+  transform: scale(1.01);
   cursor: pointer;
 }
 
-.friend img {
-  width: 50px;
-  height: 50px;
-  margin-right: 1rem;
-  border-radius: 50%;
-}
-
-.chat-content-container {
-  flex-basis: 75%;
-  height: 100%;
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-}
-
-.chat-content {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  flex-grow: 1;
-  overflow-y: scroll;
-}
-
-.chat-message {
-  margin-bottom: 1rem;
-}
-
-.message-author {
-  font-weight: bold;
-  margin-right: 0.5rem;
-}
-
-.message-sent {
-  text-align: right;
-}
-
-.chat-form {
-  display: flex;
-  align-items: center;
-  margin-top: 1rem;
-}
-
-.chat-form input {
-  flex-grow: 1;
-  padding: 0.5rem;
+.btn-send {
+  font-size: 1rem;
+  color: #FFFBF5;
+  background-color: #FD4556;
   border: none;
-  border-radius: 5px;
-  margin-right: 1rem;
+  border-radius: 4px;
+  padding: 10px;
+  transition: transform 0.3s;
 }
 
-.chat-form button {
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 5px;
-  background-color: #2196f3;
-  color: #fff;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+.btn-send:hover {
+  background-color:  rgba(253, 69, 86, 0.9);
 }
 
-.chat-form button:hover {
-  background-color: #1976d2;
+.btn-send:active {
+  transform: scale(1.01);
+  background-color:  rgba(253, 69, 86, 0.9);
+  color: #FFFBF5;
+}
+
+
+.bg-sender {
+  border: solid 1px;
+  border-color: #FD4556;
+  background-color: rgb(217, 217, 217, 0.1);
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.bg-receiver {
+  border: solid 1px;
+  border-color: white;
+  background-color: rgb(217, 217, 217, 0.1);
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.border-box{
+  border: solid 1px;
+  border-color: white;
+  border-radius: 10px;
+  padding: 10px;
+  height: 610px;
+  background-color: #0c141b;
+}
+
+.chat-box{
+  height: 500px; 
+  overflow-y: auto;
+}
+
+p, h2 {
+  color: white;
 }

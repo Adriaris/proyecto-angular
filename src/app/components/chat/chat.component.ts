@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { ChatService } from 'src/app/services/chat.service';
+import { Message } from './message';
 import { UserService } from 'src/app/services/user.service';
 import { FriendService } from 'src/app/services/friend.service';
 import { User } from 'src/app/models/user';
+
 
 @Component({
   selector: 'app-chat',
@@ -10,18 +13,47 @@ import { User } from 'src/app/models/user';
   providers: [UserService, FriendService]
 })
 export class ChatComponent {
+  messages: Message[] = [];
+  newMessage = '';
   friends: any[] = [];
   selectedFriend: any = null;
   public user: User;
-  messageThread: any[] = [];
 
-
-  constructor(private userService: UserService, private friendService: FriendService) {
+  constructor(private userService: UserService, private friendService: FriendService, private chatService: ChatService) {
     this.user = new User();
   }
-  ngOnInit(): void {
-    this.loadFriends();
+  
+  @ViewChild('scrollMe') private myScrollContainer!: ElementRef;
+
+  ngAfterViewChecked() {
+    this.scrollToBottom();
   }
+  
+  private scrollToBottom(): void {
+    this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+  }
+  
+
+  ngOnInit() {
+    this.loadFriends();
+    this.userService.getUserByToken().subscribe(
+      response => {
+        if (response) {
+          this.user = response;
+        
+        } else {
+          console.log('Error: no se pudo obtener el usuario.');
+        }
+      },
+      error => {
+        console.log(error);
+      
+      }
+    );
+    console.log(this.user)
+  }
+
+
 
   loadFriends() {
     this.friendService.listFriends().subscribe(
@@ -35,90 +67,40 @@ export class ChatComponent {
     );
   }
 
-  onFriendClick(friend: any) {
+  selectFriend(friend: any): void {
     this.selectedFriend = friend;
-    this.messageThread = []; // limpia el chat anterior
-     this.loadMessages(this.selectedFriend.id); // carga los mensajes para este amigo
+    this.getMessages();
   }
 
-  newMessageContent(event: any) {
-    //this.messageContent = event.target.value;
+  getMessages(): void {
+    if (this.selectedFriend && this.user && this.user.id && this.selectedFriend.id) {
+      this.chatService.getMessages(this.user.id, this.selectedFriend.id)
+        .subscribe(
+          messages => this.messages = messages,
+          error => console.error('Error fetching messages', error)
+        );
+    }
   }
-
-
-  /*loadMessages() {
-    this.friendService.getMessages(this.selectedFriend.id).subscribe(
-      response => {
-        this.messageThread = response;
-      },
-      error => {
-        console.log(error);
-      }
-    );*/
-
-  loadMessages(id: number) {
-    this.messageThread = [
-      {
-        id: 1,
-        sender: {
-          id: 2,
-          name: 'John Doe'
-        },
-        content: 'Hola! ¿Cómo estás?',
-        date: '2022-05-16T10:22:00Z'
-      },
-      {
-        id: 2,
-        sender: {
-          id: 1,
-          name: 'Jane Doe'
-        },
-        content: 'Estoy bien, gracias por preguntar. ¿Y tú?',
-        date: '2022-05-16T10:24:00Z'
-      },
-      {
-        id: 3,
-        sender: {
-          id: 2,
-          name: 'John Doe'
-        },
-        content: 'Bien también, ¿te apetece quedar para tomar un café?',
-        date: '2022-05-16T10:26:00Z'
-      },
-      {
-        id: 4,
-        sender: {
-          id: 1,
-          name: 'Jane Doe'
-        },
-        content: 'Claro, me parece bien. ¿Qué día te viene bien?',
-        date: '2022-05-16T10:28:00Z'
-      },
-      {
-        id: 5,
-        sender: {
-          id: 2,
-          name: 'John Doe'
-        },
-        content: '¿Qué tal el miércoles por la tarde?',
-        date: '2022-05-16T10:30:00Z'
-      },
-      {
-        id: 6,
-        sender: {
-          id: 1,
-          name: 'Jane Doe'
-        },
-        content: 'Genial, nos vemos el miércoles a las 16:00',
-        date: '2022-05-16T10:32:00Z'
-      }
-    ];
-    
-  }
-  sendMessage() {
-
-  }
-}
+  
   
 
-
+  sendMessage(): void {
+    if (!this.newMessage || !this.selectedFriend || !this.user || !this.user.id) return;
+    this.chatService.sendMessage(this.user.id, this.selectedFriend.id, this.newMessage)
+      .subscribe(
+        () => {
+          this.getMessages();
+          this.newMessage = '';
+        },
+        error => console.error('Error sending message', error)
+      );
+  }
+  
+  formatTime(dateString: string): string {
+    const date = new Date(dateString);
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    return `${hours}:${minutes}`;
+  }
+  
+}

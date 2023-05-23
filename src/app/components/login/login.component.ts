@@ -31,10 +31,7 @@ export class LoginComponent implements OnInit {
     this.user = new User();
   }
 
-  /* user = {
-     email: '',
-     password: ''
-   };*/
+
 
   onSubmit(form: NgForm) {
     this._userService.signup(this.user).subscribe(

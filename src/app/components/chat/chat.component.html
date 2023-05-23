@@ -1,43 +1,46 @@
-<div class="row">
-  <div class="col-3">
-    <div class="card">
-      <div class="card-header">
-        <h4>Friends</h4>
-      </div>
-      <div class="card-body">
-        <div class="list-group">
-          <a *ngFor="let friend of friends" class="list-group-item list-group-item-action" (click)="onFriendClick(friend)">
-            {{friend.name}}
-          </a>
-        </div>
+<div class="container mt-3 border-box">
+  <div class="row">
+    <div class="col-4">
+      <h2>Chats</h2>
+      <div *ngFor="let friend of friends" class="mb-2">
+        <button class="btn btn-chat w-100 d-flex align-items-center justify-content-start p-0" (click)="selectFriend(friend)">
+          <div class="p-3">
+            {{ friend.name }}
+          </div>
+        </button>
       </div>
     </div>
-  </div>
+    
 
-  <div class="col-9">
-    <div class="card">
-      <div class="card-header">
-        <h4>Chat</h4>
-      </div>
-      <div class="card-body">
-        <div *ngIf="selectedFriend" class="chat-container">
-          <div class="message-thread">
-            <div *ngFor="let message of messageThread" [ngClass]="{ 'incoming': message.incoming, 'outgoing': !message.incoming }">
-              <div class="message">{{message.content}}</div>
+
+    <div class="col-8" *ngIf="selectedFriend">
+      <h2>{{selectedFriend.name}}</h2>
+
+      <!-- Añade aquí la altura y el overflow-y -->
+      <div class="chat-box" #scrollMe>
+        <div *ngFor="let message of messages" class="my-3">
+
+          <div class="d-flex align-items-start flex-column">
+            <div class="col-8 ml-auto text-start bg-receiver" *ngIf="message.sender_id != user.id">
+              <p>{{ message.message }}</p>
+              <p class="text-end"><small >{{ formatTime(message.sent_at) }}</small></p>
             </div>
           </div>
 
-          <div class="message-form">
-            <form>
-              <input type="text" class="form-control" [(ngModel)]="newMessageContent" placeholder="Type your message...">
-              <button type="submit" class="btn btn-primary" (click)="sendMessage()">Send</button>
-            </form>
+          <div class="d-flex align-items-end flex-column">
+            <div class="col-8 text-start bg-sender" *ngIf="message.sender_id == user.id">
+              <p>{{ message.message }}</p>
+              <p class="text-end"><small >{{ formatTime(message.sent_at) }}</small></p>
+            </div>
           </div>
-        </div>
-        <div *ngIf="!selectedFriend" class="no-chat-selected">
-          Select a friend to start a chat.
+
         </div>
       </div>
+
+      <div class="input-group">
+        <input type="text" [(ngModel)]="newMessage" (keydown.enter)="sendMessage()" class="form-control">
+        <button (click)="sendMessage()" class="btn btn-send">Send</button>
+      </div>
     </div>
+
   </div>
-</div>
