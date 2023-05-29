@@ -19,9 +19,9 @@
             <div class="form-group">
                 <label for="nickname">Nickname:</label>
                 <input type="text" class="form-control" name="nickname" id="nickname" [(ngModel)]="user.nickname"
-                    required maxlength="15">
+                    required maxlength="12">
                 <div *ngIf="registerForm.controls['nickname'].invalid && registerForm.controls['nickname'].touched">
-                    <span class="text-danger">Nickname is required and must be no longer than 20 characters.</span>
+                    <span class="text-danger">Nickname is required and must be no longer than 12 characters.</span>
                 </div>
             </div>
 

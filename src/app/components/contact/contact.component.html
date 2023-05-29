@@ -1,36 +1,109 @@
 <div class="container">
-    <div class="row mt-3">
-      <div class="col-md-6">
-        <form #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)" ngNativeValidate>
-          <h1 class="text-center mb-3">Contact</h1>
-          <div class="mb-3">
-            <label for="nombre" class="form-label text-white">Name:</label>
-            <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="contactData.nombre" required>
-            <small *ngIf="!contactForm.controls['nombre'].valid && contactForm.controls['nombre'].touched" class="invalid-feedback d-block">
-              Please enter your name
-            </small>
+  <div class="row mt-3 mb-3">
+    <div class="col-md-6">
+      <form #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)" ngNativeValidate>
+        <h1 class="text-center mb-3">Contact Us</h1>
+        <div class="mb-3">
+          <label for="nombre" class="form-label text-white">Name:</label>
+          <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="contactData.nombre" required>
+          <small *ngIf="!contactForm.controls['nombre'].valid && contactForm.controls['nombre'].touched"
+            class="invalid-feedback d-block">
+            Please enter your name
+          </small>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label text-white">Email:</label>
+          <input type="email" class="form-control" id="email" name="email" [(ngModel)]="contactData.email" required>
+          <small *ngIf="!contactForm.controls['email'].valid && contactForm.controls['email'].touched"
+            class="invalid-feedback d-block">
+            Please enter a valid email address
+          </small>
+        </div>
+        <div class="mb-3">
+          <label for="mensaje" class="form-label text-white">Message:</label>
+          <textarea class="form-control" id="mensaje" name="mensaje" [(ngModel)]="contactData.mensaje" rows="5"
+            required></textarea>
+          <small *ngIf="!contactForm.controls['mensaje'].valid && contactForm.controls['mensaje'].touched"
+            class="invalid-feedback d-block">
+            Please enter a message
+          </small>
+        </div>
+        <button type="submit" class="btn btn-primary"
+          style="background-color: #fd4556; border-color: #fd4556;">Send</button>
+      </form>
+    </div>
+    <div class="col-md-6 mt-5">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2985.227005547442!2d2.1611701152257117!3d41.38506217926117!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4a29c747e94eb%3A0xc83b8a89c4120c56!2sPla%C3%A7a%20de%20la%20Universitat%2C%2008007%20Barcelona%2C%20Spain!5e0!3m2!1sen!2sus!4v1659133586719!5m2!1sen!2sus"
+        width="100%" height="450" style="border: none; border-radius: 10px;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+  </div>
+  <!-- FAQs Section -->
+  <div class="row mt-3 faq-container">
+    <div class="col-12">
+      <h1 class="text-start mb-3">FAQs</h1>
+      <div class="accordion" id="faqAccordion">
+        <!-- Question 1-->
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+              aria-expanded="true" aria-controls="collapseOne">
+              How can I register and create a profile on the application?
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+            data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              You can register by clicking the 'Sign up' button on our homepage. After registration, you can create your profile by filling in your gaming preferences and uploading a profile picture.
+            </div>
           </div>
-          <div class="mb-3">
-            <label for="email" class="form-label text-white">Email:</label>
-            <input type="email" class="form-control" id="email" name="email" [(ngModel)]="contactData.email" required>
-            <small *ngIf="!contactForm.controls['email'].valid && contactForm.controls['email'].touched" class="invalid-feedback d-block">
-              Please enter a valid email address
-            </small>
+        </div>
+        <!-- Question 2-->
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              How do I find people with similar gaming characteristics?
+            </button>
+          </h2>
+          <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+            data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Our application has a search feature where you can input your gaming characteristics and preferences. The app will then show you a list of gamers who match your input.
+            </div>
           </div>
-          <div class="mb-3">
-            <label for="mensaje" class="form-label text-white">Message:</label>
-            <textarea class="form-control" id="mensaje" name="mensaje" [(ngModel)]="contactData.mensaje" rows="5" required></textarea>
-            <small *ngIf="!contactForm.controls['mensaje'].valid && contactForm.controls['mensaje'].touched" class="invalid-feedback d-block">
-              Please enter a message
-            </small>
+        </div>
+        <!-- Question 3 -->
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingThree">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+              How can I add friends on the application?
+            </button>
+          </h2>
+          <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+            data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              You can add friends by visiting their profile and clicking the 'Add Friend' button. Once they accept your request, they will appear in your friends list.
+            </div>
           </div>
-          <button type="submit" class="btn btn-primary" style="background-color: #fd4556; border-color: #fd4556;">Send</button>
-        </form>
-      </div>
-      <div class="col-md-6 mt-5">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2985.227005547442!2d2.1611701152257117!3d41.38506217926117!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4a29c747e94eb%3A0xc83b8a89c4120c56!2sPla%C3%A7a%20de%20la%20Universitat%2C%2008007%20Barcelona%2C%20Spain!5e0!3m2!1sen!2sus!4v1659133586719!5m2!1sen!2sus"
-          width="100%" height="450" style="border: none; border-radius: 10px;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+        <!-- Question 4-->
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingFour">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+              Can I chat with other users on the application?
+            </button>
+          </h2>
+          <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+            data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Yes, you can use our built-in chat feature to message other users. Just go to their profile and click the 'Message' button.
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  
+</div>

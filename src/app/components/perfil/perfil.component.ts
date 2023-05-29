@@ -1,4 +1,4 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { FriendService } from 'src/app/services/friend.service';
 import { User } from '../../models/user';
@@ -12,8 +12,11 @@ import { Router } from '@angular/router';
 })
 export class PerfilComponent {
   @Input() identity: User | null = null;
+  @Output() logoutEvent = new EventEmitter<void>();
 
   friendRequests: any[] = [];
+  
+
 
   constructor(
     public userService: UserService,
@@ -43,10 +46,12 @@ export class PerfilComponent {
   logout() {
     this.userService.logout().subscribe(() => {
       console.log('logout');
+      this.logoutEvent.emit(); // Emitir el evento de logout
       this.router.navigate(['/login']);
       location.reload();
     });
   }
+  
 
   acceptFriendRequest(request: any) {
     this.friendService.updateFriendshipStatus(request.id, 'accepted').subscribe(

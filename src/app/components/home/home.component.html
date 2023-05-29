@@ -85,11 +85,17 @@
 
 
 
-<div class="loading-spinner" *ngIf="users.length === 0">
+<!-- Muestra esto mientras se están cargando los usuarios -->
+<div class="loading-spinner" *ngIf="loadingUsers">
     <div class="spinner-border text-danger" role="status">
         <span class="sr-only"></span>
     </div>
     <p style="color: #FFFBF5">Loading users...</p>
+</div>
+
+<!-- Muestra esto si la carga terminó y no hay usuarios -->
+<div class="loading-spinner" *ngIf="!loadingUsers && users.length === 0">
+    <h1 style="color: #FFFBF5">No users found</h1>
 </div>
 
 <div class="container pt-3">
@@ -230,10 +236,17 @@
 
                 </div>
                 <div class="modal-footer d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn report-user-btn">
+
+                    <!-- Botón de reporte, que muestra y oculta el área de texto y el botón de envío -->
+                    <button type="button" class="btn report-user-btn" (click)="onReportButtonClick()" *ngIf="!reportSent">
                         <i class="bi bi-exclamation-diamond-fill"></i>
                         <span> &nbsp;Report</span>
                     </button>
+                    <button type="button" class="btn btn-success" *ngIf="reportSent">
+                        <span> Sended&nbsp;</span>
+                        <i class="bi bi-check-lg"></i>
+                    </button>
+
                     <div *ngIf="loading">
                         <div class="spinner-border text-danger" role="status">
                             <span class="sr-only"></span>
@@ -258,7 +271,24 @@
                         </ng-template>
                     </div>
                 </div>
+                <!-- Área de texto y botón de envío, que se muestran y ocultan al hacer clic en el botón de reporte -->
+                <div class="text-center" *ngIf="showReportArea">
+                    <textarea class="col-11" [(ngModel)]="description" placeholder="Write here your report"></textarea>
+                    <button type="button" class="btn btn-warning" (click)="onSubmitReportClick()">Submit</button>
+                </div>
             </div>
         </div>
     </div>
+    <div class="d-flex justify-content-center mt-3">
+        <nav aria-label="Page navigation example">
+            <div class="pagination">
+                <button class="page-button" [disabled]="isPrevDisabled" (click)="prevPage()">Prev</button>
+                <span class="page-info">{{ currentPage }} / {{ totalPages }}</span>
+                <button class="page-button" [disabled]="isNextDisabled" (click)="nextPage()">Next</button>
+            </div>
+        </nav>
+    </div>
+
+
+
 </div>

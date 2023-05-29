@@ -10,21 +10,23 @@ import { ContactComponent } from './components/contact/contact.component';
 import { PerfilcrudComponent } from './components/perfilcrud/perfilcrud.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { AuthGuard } from './guards/auth.guard';
+import { AdminGuard } from './guards/admin.guard';
 import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
 import { TermsAndConditionsComponent } from './components/terms-and-conditions/terms-and-conditions.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
-  { path: 'aboutus', component: AboutusComponent, canActivate: [AuthGuard] },
+  { path: 'aboutus', component: AboutusComponent},
   { path: 'error', component: ErrorComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'contact', component: ContactComponent, canActivate: [AuthGuard] },
+  { path: 'contact', component: ContactComponent},
   { path: 'profile', component: PerfilcrudComponent, canActivate: [AuthGuard] },
   { path: 'chat', component: ChatComponent, canActivate: [AuthGuard] },
-  { path: 'chat', component: ChatComponent, canActivate: [AuthGuard] },
-  { path: 'privacy-policy', component: PrivacyPolicyComponent, canActivate: [AuthGuard] },
-  { path: 'terms-and-conditions', component: TermsAndConditionsComponent, canActivate: [AuthGuard] },
+  { path: 'privacy-policy', component: PrivacyPolicyComponent },
+  { path: 'terms-and-conditions', component: TermsAndConditionsComponent},
+  { path: 'admin', component: AdminComponent, canActivate: [AdminGuard] },
   { path: '**', redirectTo: 'error' }
 ];
 

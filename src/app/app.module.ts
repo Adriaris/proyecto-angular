@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { AuthGuard } from './guards/auth.guard'; // Importa el guard de ruta
+import { AuthGuard } from './guards/auth.guard';
+import { AdminGuard } from './guards/admin.guard';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -21,6 +22,9 @@ import { ChatComponent } from './components/chat/chat.component';
 import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
 import { TermsAndConditionsComponent } from './components/terms-and-conditions/terms-and-conditions.component';
 import { ProfileImageUploadComponent } from './components/profile-image-upload/profile-image-upload.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { UserService } from './services/user.service';
+
 
 
 @NgModule({
@@ -40,6 +44,7 @@ import { ProfileImageUploadComponent } from './components/profile-image-upload/p
     PrivacyPolicyComponent,
     TermsAndConditionsComponent,
     ProfileImageUploadComponent,
+    AdminComponent,
 
   ],
   imports: [
@@ -49,7 +54,10 @@ import { ProfileImageUploadComponent } from './components/profile-image-upload/p
     AppRoutingModule,
     ReactiveFormsModule
   ],
-  providers: [AuthGuard // Agrega el guard de ruta como un provider
+  providers: [
+    AuthGuard,
+    AdminGuard,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

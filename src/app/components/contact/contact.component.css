@@ -84,4 +84,49 @@ form {
     font-size: 1.2rem;
     font-weight: bold;
   }
-  
+
+/* Existing styles */
+
+.faq-container{
+  margin-top: 3rem !important;
+}
+.accordion-item {
+  border: none !important;
+  border-top-left-radius: 15px !important;
+  border-top-right-radius: 15px !important;
+}
+
+
+.accordion-button {
+  font-size: 1.2rem;
+  color: #fffbf5;
+  border: none;
+  width: 100%;
+  text-align: left;
+  background-color: #0f1922;
+  transition: border-color 0.15s ease-in-out;
+}
+
+.accordion-button:hover {
+  border-color: #fd4556;
+}
+
+.accordion-button:not(.collapsed) {
+  color: #fd4556;
+  border-color: #fd4556;
+}
+
+.accordion-body {
+  font-size: 1.2rem;
+  color: #0f1922;
+  line-height: 1.6;
+  margin-top: 10px;
+
+}
+
+h1.accordion-header {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #fd4556 !important;
+}

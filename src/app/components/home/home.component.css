@@ -180,7 +180,6 @@
   background-color: #0F1922;
   color: #FFFBF5;
   border-radius: 10px;
-  /*box-shadow: 0px 0px 0px 1px rgba(255,255,255,0.9);*/
 }
 
 .modal-header {
@@ -220,30 +219,50 @@
   background-color: #999;
 }
 
-/*.add-friend-btn span {
-  display: none;
-}
-
-.add-friend-btn:hover span {
-  display: inline-block;
-}*/
-
-
 .report-user-btn  {
   background-color: #FFA500;
 }
-/*.report-user-btn span {
-  display: none;
-}
-
-.report-user-btn:hover span {
-  display: inline-block;
-}*/
 
 .modal-open {
   background-color: rgba(0, 0, 0, 0.8);
   overflow: hidden;
 }
+/*------------------------------------*/
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 300px;
+  padding: 10px;
+  background-color: #0c141b;
+  border-radius: 5px;
+  color: white;
+}
 
+.page-button {
+  background-color: #fd4556;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.2s;
+}
+
+.page-button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.page-button:hover:not(:disabled) {
+  background-color: #fd45578d;
+}
+
+.page-info {
+  margin: 0 10px;
+  padding: 10px;
+  background-color: #0F1922;
+  border-radius: 5px;
+}
 
 

@@ -7,8 +7,6 @@ import { HttpClient } from '@angular/common/http';
 import { CharacterService } from 'src/app/services/character.service';
 import { RankService } from 'src/app/services/rank.service';
 
-
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -30,7 +28,18 @@ export class HomeComponent implements OnInit {
   nationalities: any[] = [];
   filteredUsers: User[] = [];
   showFilteredUsers = false;
-
+  currentPage: number = 1;   // Almacena la página actual.
+  totalPages: number = 1;        // Almacena el número total de páginas.
+  isPrevDisabled: boolean = true;   // Controla si el botón "Anterior" debe estar deshabilitado.
+  isNextDisabled: boolean = true;   // Controla si el botón "Siguiente" debe estar deshabilitado.
+  page: number = 1;          // El número de página que se pasará al método getAllUsers().
+  pageSize: number = 12;
+  public loadingUsers = true;
+  description: string = "";
+  showReportArea: boolean = false;
+  reporterId: number = 0;
+  reportedId: number = 0;
+  reportSent = false;
 
 
   constructor(
@@ -53,14 +62,8 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userService.getAllUsers().subscribe(data => {
-      this.users = data.map(user => {
-        return {
-          ...user,
-          profileImg: user.profileImg ? 'http://localhost:8000/uploads/profile-img/' + user.profileImg : 'http://localhost:8000/uploads/profile-img/default.png'
-        };
-      });
-    });
+
+    this.loadUsers();
 
     this.userService.getUserByToken().subscribe(
       response => {
@@ -93,11 +96,64 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  applyFilters() {
+    this.page = 1; // Vuelve a la primera página cuando se aplican nuevos filtros
+    this.loadUsers();
+  }
+
+
+  loadUsers() {
+    const filters = this.filterForm.value;
+    this.loadingUsers = true;
+
+    this.userService.getAllUsers(this.page, this.pageSize, filters).subscribe(response => {
+      this.users = response.data.map(user => {
+        
+        return {
+          ...user,
+          profileImg: user.profileImg ? 'http://localhost:8000/uploads/profile-img/' + user.profileImg : 'http://localhost:8000/uploads/profile-img/default.png'
+        };
+        
+      });
+      console.log(this.users)
+      this.loadingUsers = false;
+      this.currentPage = response.currentPage;
+      this.totalPages = response.totalPages;
+
+      this.updateButtons();
+    });
+  }
+
+  updateButtons(): void {
+    this.isPrevDisabled = this.currentPage === 1;
+    this.isNextDisabled = this.currentPage === this.totalPages;
+  }
+
+
+  prevPage(): void {
+    if (this.currentPage > 1) {
+      this.page--;
+      this.loadUsers();
+      window.scrollTo(0, 0);
+    }
+  }
+
+  nextPage(): void {
+    if (this.currentPage < this.totalPages) {
+      this.page++;
+      this.loadUsers();
+      window.scrollTo(0, 0);
+    }
+  }
+
   onCardClick(userCLicked: User) {
     this.selectedUser = userCLicked;
     this.loading = true;
     this.isFriend = false;
     this.isFriendRequestSent = false;
+    this.showReportArea = false;
+    this.reportSent = false;
+
 
     // Verificar si el usuario seleccionado es amigo
     this.friendService.checkFriendship(this.selectedUser.id).subscribe(
@@ -174,38 +230,39 @@ export class HomeComponent implements OnInit {
 
   }
 
-  applyFilters() {
-    const filters = this.filterForm.value;
-    const filteredUsers = this.users.filter(user => {
-      if (filters.nationality && filters.nationality != '' && user.nationality != filters.nationality) {
-        return false;
-      }
-      if (filters.availability && filters.availability != '' && user.idAvailability.idAvailability != filters.availability) {
-        return false;
-      }
-      if (filters.character && filters.character !== '' &&
-      !(user.idFirstCharacter?.idCharacter == filters.character ||
-        user.idSecondCharacter?.idCharacter == filters.character ||
-        user.idThirdCharacter?.idCharacter == filters.character)) {
-      return false;
-    }
-    
-      if (filters.sRole && filters.sRole != '' && user.idSrole.idSrole != filters.sRole) {
-        return false;
-      }
-      if (filters.tRole && filters.tRole != '' && user.idTrole.idTrole != filters.tRole) {
-        return false;
-      }
-      if (filters.rank && filters.rank != '' && user.idRank.idRank != filters.rank) {
-        return false;
-      }
-      return true;
-    });
-
-    this.filteredUsers = filteredUsers;
-    this.showFilteredUsers = true;
-    console.log(this.filteredUsers);
+  onReportButtonClick() {
+    // Muestra u oculta el área de informe cuando se hace clic en el botón de informe.
+    this.showReportArea = !this.showReportArea;
   }
+
+  onSubmitReportClick() {
+    // Realiza el informe cuando se hace clic en el botón de enviar.
+    if (this.user.id && this.selectedUser) {
+      this.userService.reportUser(this.user.id, this.selectedUser.id, this.description)
+        .subscribe(
+          (response) => {
+            if (response.status == "success") {
+              this.reportSent = true;
+              // Oculta el área de informe.
+              this.showReportArea = false;
+
+              // Borra la descripción del informe.
+              this.description = '';
+            }
+
+          },
+          (error) => {
+
+            console.error(error);
+
+            this.showReportArea = false;
+          }
+        );
+    }
+  }
+
+
+
 
 
 

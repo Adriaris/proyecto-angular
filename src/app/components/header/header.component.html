@@ -21,7 +21,7 @@
           </li>
           <li class="nav-item fs-5">
             <a class="nav-link" routerLink="/contact" routerLinkActive="active" style="color: #fffbf5;"><i
-                class="bi bi-envelope"></i> Contact</a>
+                class="bi bi-envelope"></i> Support</a>
           </li>
           <li class="nav-item fs-5">
             <a class="nav-link" routerLink="/chat" routerLinkActive="active" style="color: #fffbf5;"><i
@@ -30,8 +30,8 @@
         </ul>
 
         <button class="btn ms-3 border-0 btn-icon" type="button" data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-          <img [src]="profileImage" alt="Profile Image" class="profile-image rounded-circle">
+          data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" (click)="openOffcanvas()">
+          <img [src]="profileImage" class="profile-image rounded-circle">
         </button>
 
       </div>
@@ -40,17 +40,17 @@
 
   <!--Desplegable de perfil -->
 
-  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel"
+  <div class="offcanvas offcanvas-end" [class.show]="isOffcanvasOpen" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel"
     style="background-color: #0f1922; color: #fffbf5;">
     <div class="offcanvas-header">
       <h5 class="offcanvas-title" id="offcanvasRightLabel">
         My Profile
         <i class="bi bi-pencil-square edit-pencil" (click)="openProfileCrud()"></i>
       </h5>
-      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" (click)="closeOffcanvas()"></button>
     </div>
     <div class="offcanvas-body">
-      <app-perfil [identity]="identity"></app-perfil>
+      <app-perfil [identity]="identity" (logoutEvent)="closeOffcanvas()"></app-perfil>
     </div>
 
   </div>

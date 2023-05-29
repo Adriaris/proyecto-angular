@@ -1,0 +1,102 @@
+<div class="container mt-3">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Ticket</th>
+                <th scope="col">Reporter ID</th>
+                <th scope="col">Reported ID</th>
+                <th scope="col">Description</th>
+                <th scope="col">Created at</th>
+                <th scope="col">Updated at</th>
+                <th scope="col" class="d-flex align-items-center">
+                    <span class="me-2">Status</span>
+                    <select class="form-select" style="max-width: 150px;" (change)="filterTickets($event)">
+                        <option value="all">All</option>
+                        <option value="pending">Pending</option>
+                        <option value="solved">Solved</option>
+                    </select>
+                </th>
+                <th></th>
+
+
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let ticket of reportedUsers">
+                <td>#{{ ticket.id }}</td>
+                <td><a class="link" (click)="getUserById(ticket.reporterId)" data-bs-toggle="modal"
+                        data-bs-target="#userModal">{{ ticket.reporterId }}</a></td>
+                <td><a class="link" (click)="getUserById(ticket.reportedId)" data-bs-toggle="modal"
+                        data-bs-target="#userModal">{{ ticket.reportedId }}</a></td>
+
+                <td>{{ ticket.ticketDescription }}</td>
+                <td>{{ ticket.createdAt | date:'HH:mm - dd/MM/yyyy' }}</td>
+                <td>{{ ticket.updatedAt | date:'HH:mm - dd/MM/yyyy' }}</td>
+
+                <td *ngIf="ticket.ticketStatus === 'pending'" style="color:red">{{ ticket.ticketStatus }}</td>
+                <td *ngIf="ticket.ticketStatus === 'solved'" style="color: green">{{ ticket.ticketStatus }}</td>
+
+                <td>
+                    <button *ngIf="ticket.ticketStatus === 'pending'" (click)="solveTicket(ticket)" class="btn btn-success">
+                        <i class="bi bi-check-lg"></i>
+                    </button>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="modal" tabindex="-1" [class.show]="isModalOpen" id="userModal" *ngIf="user">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">User Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    (click)="closeModal()"></button>
+            </div>
+            <div class="row bg-col" *ngIf="user">
+                <div class="col-4">
+                    <img [src]="user.profileImg" class="rounded-circle" alt="..." style="width: 75px; height:75px;">
+                </div>
+                <div class="col-8 pl-3">
+                    <h5 class="card-title col-md-10">{{ user.nickname }}</h5>
+                    <div class="row">
+                        <div class="f32 col-md-3"><span class="col-md-3 flag {{ user.nationality | lowercase }}"></span>
+                        </div>
+                        <div class="col-8 pt-1">
+                            <span>{{ getAge(user.age) }}</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-body" *ngIf="user">
+                <div class="row gray-italic">
+                    <p>{{ user.shortDescription }}</p>
+                </div>
+                <div class="row">
+                    <img *ngIf="user.idFirstCharacter" class="col-md-3" [src]="user.idFirstCharacter.imgCharacter"
+                        alt="Character image">
+                    <img *ngIf="user.idSecondCharacter" class="col-md-3" [src]="user.idSecondCharacter.imgCharacter"
+                        alt="Character image">
+                    <img *ngIf="user.idThirdCharacter" class="col-md-3" [src]="user.idThirdCharacter.imgCharacter"
+                        alt="Character image">
+                    <img *ngIf="user.idRank" class="col-md-3" [src]="user.idRank.imgRank"
+                        alt="{{ user.idRank.gameRank }}">
+                </div>
+                <div class="row">
+                    <p *ngIf="user.idSrole"><b>Roles:</b> {{ user.idSrole.srole }}, {{ user.idTrole.trole }}</p>
+                    <p *ngIf="user.idAmbition"><b>Ambition:</b> {{ user.idAmbition.ambition }}</p>
+                    <p *ngIf="user.idAvailability"><b>Availability:</b> {{ user.idAvailability.availability }}</p>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                    (click)="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

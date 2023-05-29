@@ -1,41 +1,63 @@
 <div class="container mt-3 border-box">
-  <div class="row">
+  <div class="loading-spinner" *ngIf="loadingFriends">
+    <div class="spinner-border text-danger" role="status">
+      <span class="sr-only"></span>
+    </div>
+    <p style="color: #FFFBF5">Loading friends...</p>
+  </div>
+
+  <!-- Muestra esto si la carga terminó y no hay amigos -->
+  <div class="loading-spinner" *ngIf="!loadingFriends && friends.length === 0">
+    <p>No friends found</p>
+  </div>
+
+  <div class="row" *ngIf="!loadingFriends && friends.length > 0">
     <div class="col-4">
       <h2>Chats</h2>
-      <div *ngFor="let friend of friends" class="mb-2">
-        <button class="btn btn-chat w-100 d-flex align-items-center justify-content-start p-0" (click)="selectFriend(friend)">
-          <div class="p-3">
-            {{ friend.name }}
-          </div>
-        </button>
+      <div class="friend-list-container">
+        <div *ngFor="let friend of friends" class="mb-2">
+          <button class="btn btn-chat w-100 d-flex align-items-center justify-content-start p-0"
+            (click)="selectFriend(friend)">
+            <div class="p-3">
+              {{ friend.name }}
+            </div>
+          </button>
+        </div>
       </div>
     </div>
-    
-
 
     <div class="col-8" *ngIf="selectedFriend">
-      <h2>{{selectedFriend.name}}</h2>
+      <div class="row">
+        <div class="col-10">
+          <h2>{{selectedFriend.name}}</h2>
+        </div>
+        <div class="col-2 d-flex align-items-end flex-column">
+          <button class="btn btn-reload" (click)="selectFriend(selectedFriend)"><i class="bi bi-arrow-clockwise"></i>
+          </button>
+        </div>
+      </div>
 
-      <!-- Añade aquí la altura y el overflow-y -->
+
       <div class="chat-box" #scrollMe>
         <div *ngFor="let message of messages" class="my-3">
 
           <div class="d-flex align-items-start flex-column">
-            <div class="col-8 ml-auto text-start bg-receiver" *ngIf="message.sender_id != user.id">
-              <p>{{ message.message }}</p>
-              <p class="text-end"><small >{{ formatTime(message.sent_at) }}</small></p>
+            <div class="col-auto ml-auto text-start bg-receiver max-col-8" *ngIf="message.sender_id != user.id">
+              <p class="message">{{ message.message }}</p>
+              <p class="text-end time"><small>{{ formatTime(message.sent_at) }}</small></p>
             </div>
           </div>
 
           <div class="d-flex align-items-end flex-column">
-            <div class="col-8 text-start bg-sender" *ngIf="message.sender_id == user.id">
-              <p>{{ message.message }}</p>
-              <p class="text-end"><small >{{ formatTime(message.sent_at) }}</small></p>
+            <div class="col-auto text-start bg-sender max-col-8" *ngIf="message.sender_id == user.id">
+              <p class="message">{{ message.message }}</p>
+              <p class="text-end time"><small>{{ formatTime(message.sent_at) }}</small></p>
             </div>
           </div>
 
         </div>
       </div>
+
 
       <div class="input-group">
         <input type="text" [(ngModel)]="newMessage" (keydown.enter)="sendMessage()" class="form-control">

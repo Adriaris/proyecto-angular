@@ -14,6 +14,8 @@ export class ProfileImageUploadComponent {
   @Output() imageSelected = new EventEmitter<File>();
   public user: User;
   profileImage = "default.png";
+  public uploadError = false;
+
 
   constructor(
     private userService: UserService,
@@ -62,12 +64,23 @@ export class ProfileImageUploadComponent {
         (response) => {
           // La imagen se ha subido exitosamente
           console.log('Imagen subida:', response);
+      
+          // Actualizar la imagen de perfil
+          this.getProfileImage();
+      
+          // Resetea el error de subida si la subida es exitosa
+          this.uploadError = false;
         },
         (error: any) => {
           // Error al subir la imagen
           console.error('Error al subir la imagen:', error);
+      
+          // Configura el error de subida en true si ocurre un error
+          this.uploadError = true;
         }
       );
+      
+      
     }
   }
 

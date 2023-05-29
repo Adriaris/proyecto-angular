@@ -13,6 +13,8 @@ export class HeaderComponent implements OnInit {
 
   public user: User;
   profileImage = "";
+  isOffcanvasOpen = false;
+
 
   constructor(
     private router: Router,
@@ -24,14 +26,26 @@ export class HeaderComponent implements OnInit {
     this.userService.getProfileImage().subscribe(
       (response) => {
         // Asignar la ruta de la imagen a la variable
-        this.profileImage = response.profile_img;
+        if (response.status == "success" || response.status == "no-registered") {
+          this.profileImage = response.profile_img;
+        }
+
+
       },
       (error) => {
+        this.profileImage = "http://localhost:8000/uploads/profile-img/default.png";
         console.error('Error al obtener la imagen del perfil:', error);
       }
     );
   }
-  
+
+  closeOffcanvas() {
+    this.isOffcanvasOpen = false; // Cierra el offcanvas
+  }
+  openOffcanvas() {
+    this.isOffcanvasOpen = true; // Cierra el offcanvas
+  }
+
 
   openProfileCrud() {
     this.router.navigate(['/profile']).then(() => {

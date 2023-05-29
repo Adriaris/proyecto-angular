@@ -1,0 +1,87 @@
+td,th {
+  color: white;
+}
+
+.form-select{
+    padding: 0px !important;
+}
+
+.link {
+    color: rgb(51, 51, 230);
+    text-decoration: underline;
+}
+
+.link:hover {
+    color: #ff4556; /* cambiar el color a rojo al pasar el cursor sobre el enlace */
+    text-decoration: none;
+    cursor: pointer;
+  }
+/*----------------*/
+
+.modal-dialog {
+    max-width: 400px;
+}
+
+.modal-content {
+    background-color: #0F1922;
+    color: #FFFBF5;
+    border-radius: 10px;
+}
+
+.modal-header {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.modal-title {
+    color: #FD4556;
+    font-size: 1.5rem;
+}
+
+.card-body > .row {
+    background-color: #0c141b;
+    padding: 10px;
+    margin: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+.bg-col {
+    background-color: #0c141b;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    padding-right: 0px;
+    margin: 15px;
+    margin-bottom: 0px;
+    border-radius: 10px;
+}
+
+.card-title {
+    font-size: 1rem;
+    font-weight: bold;
+    padding-top: 10px;
+    color: #FD4556;
+    font-family: 'Raleway', sans-serif;
+}
+
+.card-body {
+    text-align: left;
+    background-color: #0F1922;
+    color: #FFFBF5;
+    padding-top: 0;
+}
+
+.gray-italic {
+    color: #999;
+    font-style: italic;
+  }
+
+  .bg-row-modal {
+    background-color: #0c141b;
+    padding: 10px;
+    margin: 0 -10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+  }
